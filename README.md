@@ -8,7 +8,9 @@ The first is a Latex template associated to scripts to compile and load automati
 This second tools need only a Firefox browser (or the Tiddly Desktop software). I could make this notebook compatible with more browsers. Using only Firefox as renderer software makes this tool cross-platform and portable.
 
 ** HOW TO USE **
+
 First thing first, an example is provided.
+You do not need server to run it. Open it directly in firefox or Tiddy Desktop Software.
 
 Notebooks are divided in several parts:
 
