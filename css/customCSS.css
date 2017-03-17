@@ -1,0 +1,139 @@
+
+body{
+  color: #333333;
+  margin: 20%;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "DejaVu Sans", sans-serif
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* External links */
+a {
+  color: #333333;
+  text-decoration: underline;
+}
+
+/*ToC*/
+.nav-ToC-list,
+.volume-ToC-list,
+.chapter-ToC-list {
+
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-right: 40px;
+  padding-left: 60px;
+
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+
+  list-style-type:none;
+  border-style: solid;
+  border-left-color: #fff;
+  border-right-color: #fff;
+  border-width: 1px;
+}
+
+.nav-ToC,
+.nav-ToC-header,
+.volume-ToC-header,
+.chapter-ToC-header{
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-right: 0px;
+  padding-left: 0px;
+
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.nav-ToC-list-element,
+.volume-ToC-list-element,
+.chapter-ToC-list-element {
+  color: #333333;
+  text-decoration: underline;
+}
+
+/*Volume*/
+
+.volume {
+  padding-top: 30%;
+  padding-bottom: 0px;
+  padding-right: 0px;
+  padding-left: 0px;
+  page-break-before: always;
+}
+
+/*Chapter*/
+
+.chapter {
+  padding-top: 20%;
+  padding-bottom: 0px;
+  padding-right: 0px;
+  padding-left: 0px;
+  page-break-before: always;
+}
+
+/*Section*/
+
+.section{
+  padding-top: 10%;
+  padding-bottom: 0px;
+  padding-right: 0px;
+  padding-left: 0px;
+  page-break-before: always;
+}
+
+/*Section tags*/
+
+.section-tags ul {
+    margin: 0px 0px 0px 00px;
+    padding: 0px 0px 0px 00px;
+}
+
+.section-tags-list li {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    display: inline;
+    list-style-type: none;
+
+}
+
+.section-tags-list-element {
+    margin: 2px 2px 2px 2px;
+    padding: 0px 10px 0px 10px;
+    background-color: #EECC66;
+    border-radius: 25px;
+    color: #333333;
+    display:inline-block;
+}
+
+/*Body text*/
+.text-body {
+  white-space: pre-line;
+}
+
+/*Source*/
+
+.source {
+  font-style: italic;
+  white-space: pre-line;
+}
+
+figcaption {
+  padding-top: 0px;
+  padding-bottom: 20px;
+  padding-right: 0px;
+  padding-left: 0px;
+
+  text-align: center
+}
+
+img,
+iframe {
+ width: 100%;
+  height: 360px
+}

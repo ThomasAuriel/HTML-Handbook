@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+
+<body title='A Simple Note'
+	author='Thomas Auriel'>
+
+	<script src="./js/fileScripts.js"></script>
+	<script src="./js/chapterScripts.js"></script>
+	<script src="./js/sectionScripts.js"></script>
+	<script src="./js/tocScripts.js"></script>
+	<script src="./js/volumeScripts.js"></script>
+
+	<script src="./js/autolink.js"></script>
+	<script src="./js/d3-4.7.3/d3.js"></script>
+	<script src="./js/jquery-3.1.1.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="./css/customCSS.css">
+	<script type="text/javascript">
+
+		$(document).ready(function()
+		{
+
+			$('#volume1').append(getFileContent('./data/volume.html', 'html', false))
+
+			//Update volume
+			$('.volume').each(function(index, volume){
+				var urlContentVolume = volume.getAttribute('content')
+				formatVolume(volume, urlContentVolume, true)
+			})
+			//Update chapters
+			$('.chapter').each(function(index, chapter){
+				var urlContentChapter = chapter.getAttribute('content')
+				formatChapter(chapter, urlContentChapter)
+			})
+			//Update sections
+			$('.section').each(function(index, section){
+				formatSection(section)
+				sectionFoot(section)
+			})
+			//Update the general ToC
+			formatGeneralToC($(this))
+			
+
+			//Auto link all contents
+			try{
+				$('div').each(function( index, value ) {
+					value.innerHTML = value.innerHTML.autoLink()
+				})
+			}catch(ex){}
+		});
+
+	</script>
+
+
+	<div class="document-title-page"></div>
+
+	<div class="nav-ToC"></div>
+
+	<div id="volume1"></div>
+	<div id="volume2"></div>
+	<div id="volume3"></div>
+
+</body>
+</html>
