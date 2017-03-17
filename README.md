@@ -14,8 +14,11 @@ First thing first, an example is provided.
 You do not need server to run it. Open it directly in firefox or Tiddy Desktop Software.
 
 Notebooks are divided in several parts:
-    -The root HTML file and JavaScript are the engine of this tool. They manage to collect all the fragments and assemble them.
-    -The CSS folder contains the document style for screens and paper.
-    -The last part is the data. It represents all the notes and are divided between volume, chapter, sections. This last element represents notes. 
+
+   -The root HTML file and JavaScript are the engine of this tool. They manage to collect all the fragments and assemble them.
+    
+   -The CSS folder contains the document style for screens and paper.
+   
+   -The last part is the data. It represents all the notes and are divided between volume, chapter, sections. This last element represents notes. 
 
 Chapter and volume have JSON files associated. Each one represents the list of elements to contain. The volume JSON will refer to chapters and the chapter JSON will refer to sections. So when you add a section or a chapter, don’t forget to update the JSON of the parent. To assemble multiple volumes in one document, you need to update, ‘Notes With Volume.html’.
