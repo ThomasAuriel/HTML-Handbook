@@ -4,8 +4,15 @@
 <body title='A Simple Note'
 	author='Thomas Auriel'>
 
-	<script src="./js/fileScripts.js"></script>
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="./css/customCSS.css">
+
 	<script src="./js/chapterScripts.js"></script>
+	<script src="./js/csvScripts.js"></script>
+	<script src="./js/fileScripts.js"></script>
+	<script src="./js/printScripts.js"></script>
 	<script src="./js/sectionScripts.js"></script>
 	<script src="./js/tocScripts.js"></script>
 	<script src="./js/volumeScripts.js"></script>
@@ -13,12 +20,10 @@
 	<script src="./js/autolink.js"></script>
 	<script src="./js/d3-4.7.3/d3.js"></script>
 	<script src="./js/jquery-3.1.1.js"></script>
+	<script src="./js/jquery-csv/jquery.csv.js"></script>
 	<script src="./js/katex/katex.js"></script>
 	<script src="./js/katex/katex.min.js"></script>
 	<script src="./js/katex/contrib/auto-render.min.js"></script>
-
-	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="./css/customCSS.css">
 
 	<script type="text/javascript">
 
@@ -27,16 +32,14 @@
 
 			$('#handbook').append(getFileContent('./data/handbook.html', 'html', false))
 
-			$('#aVolume').append(getFileContent('./data/aVolume/volume.html', 'html', false))
-
 			//Update volume
 			$('.volume').each(function(index, volume){
-				var urlContentVolume = volume.getAttribute('content')
+				var urlContentVolume = $(volume).attr('content')
 				formatVolume(volume, urlContentVolume, false)
 			})
 			//Update chapters
 			$('.chapter').each(function(index, chapter){
-				var urlContentChapter = chapter.getAttribute('content')
+				var urlContentChapter = $(chapter).attr('content')
 				formatChapter(chapter, urlContentChapter)
 			})
 			//Update sections
@@ -46,19 +49,27 @@
 			})
 			//Update the general ToC
 			formatGeneralToC($(this))
-			
 
 			//Auto link all contents
-			try{
-				$('div').each(function( index, value ) {
-					value.innerHTML = value.innerHTML.autoLink()
-				})
-			}catch(ex){}
+			$('div').each(function( index, value ) {
+				value.innerHTML = value.innerHTML.autoLink()
+			})
+
 			//render equations
 			renderMathInElement(document.body);
+
+			//Format tables
+			$('.csv-table').each(function(index, value){
+				convertCSVtoHTML(value)
+			})
+
+			//Define lazy load
+			/*$('img').unveil(100);
+			$('div').unveil(100);*/
 		});
 
 	</script>
+
 
 	<div id='handbook'></div>
 

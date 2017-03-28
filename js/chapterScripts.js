@@ -19,7 +19,7 @@ function formatChapter(chapter, urlContentChapter){
 	$('.chapter-ToC', chapter).append($('<h2>').addClass('chapter-ToC-header').append('Content'))
 	var sectionList = $('<ul>');
 	sectionList.attr('class', 'chapter-ToC-list')
-	sectionList.attr('id', 'chapter-ToC-list-'+chapter.id)
+	sectionList.attr('id', 'chapter-ToC-list-'+ chapter.id)
 	$('.chapter-ToC', chapter).append(sectionList)
 	// Update the ToC
 	var sections = $('.section', chapter) //select element depending their class
@@ -29,6 +29,7 @@ function formatChapter(chapter, urlContentChapter){
 			$('<li>').append(
 				$('<a>').attr('href',"#" + section.id)
 				.attr('class','chapter-ToC-list-element')
+				.attr('level', $(section).attr('class').split(' ')[0])
 				.append(section.title)
 			)
 		)
