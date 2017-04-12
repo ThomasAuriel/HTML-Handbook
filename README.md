@@ -1,19 +1,24 @@
-HTML Notebook
+## HTML Notebook
 
-HTML Notebook is a way to organise notes. They are linked together through tags allowing to navigate easily in.
-Notes are grouped by chapters and by volume. When displaying the document, all notes are aggregated in a unique vertical column. This representation is close to what you could have by printing it.
+HTML Notebook is a way to organise notes inside notebooks. They are linked together through tags. All notes are aggregated in a unique vertical column allowing to display and print it similarly to a true notebook.
 
-I created this tool since I was not able to find a similar and simple method to show information. There are different interesting tools as wikis (such as TiddlyWiki or Zim). However, the information is displayed by elements (as a tiddly) and not following a stream. So I developed two tools to do so.
+Notes are called sections. They are grouped by volumes divided in chapters. Each elements are independent from the parent. For instance, if a section is defined in a chapter, to move it to another chapter, just displace the section file in our target chapter and regenerate the notebook structure. If you wish to display a notebook with a supplementary volume just add it in the notebook and regenerate the folder structure.
+
+## Motivation
+
+I created this tool since I was not able to find a similar and simple method to show information. There are different interesting tools as wikis (such as TiddlyWiki or Zim). However, the information is displayed by elements and not in a stream. The stream view allows to move around those elements without following a precise path and find easier information (in addition of tag navigation).
+
 The first is a Latex template associated to scripts to compile and load automatically content. I appreciate it since it is easy to use it. But it requires a Latex compiler.
-This second tools need only a Firefox browser (or the Tiddly Desktop software). I could make this notebook compatible with more browsers. Using only Firefox as renderer software makes this tool cross-platform and portable.
 
-HOW TO USE
-First thing first, an example is provided.
+This second tools need only a Firefox browser (or the Tiddly Desktop software). Using only Firefox as renderer software makes this tool cross-platform and portable. I did not develop this tool for other browser since they have limitations access to local files.
+
+## How to Use
+I provide an example in the sources. This example include all the structure that are handle.
 
 Notebooks are divided in several parts:
 
     —The root HTML file and JavaScript are the engine of this tool. They manage to collect all the fragments and assemble them.
     —The CSS folder contains the document style for screens and paper.
-    —The last part is the data. It represents all the notes and are divided between volume, chapter, sections. This last element represents notes. 
+    —The last part is the data. It represents all the notes and are divided between volumes, chapters and sections. This last element represents notes.
 
-Chapter and volume have JSON files associated. Each one represents the list of elements to contain. The volume JSON will refer to chapters and the chapter JSON will refer to sections. So when you add a section or a chapter, don’t forget to update the JSON of the parent. To assemble multiple volumes in one document, you need to update, ‘Notes With Volume.html’.
+The structure of the notebook is contained in a json file called ‘content.json’ and in the same folder that the notebook. This file can be handled by hand, but I recommend to use the jar file associated to the project. It is easier to use.
