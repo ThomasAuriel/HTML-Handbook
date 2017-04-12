@@ -17,3 +17,8 @@ function getFileContent(url, dataType, asynchronous){
 
 	return  toReturn
 }
+
+function loadJSON(){
+	var jsonContentFile = getFileContent(urlJSON, "json", false)
+	var json = jQuery.parseJSON(jsonContentFile);
+}
