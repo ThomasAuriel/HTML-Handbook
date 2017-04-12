@@ -12,7 +12,9 @@ div {
   text-justify: inter-word;
 }
 .section-tags-list,
-.section-tags-list-element{
+.section-tags-list-element,
+.subsection-tags-list,
+.subsection-tags-list-element{
   /* Do not justify to do not strech tags */
   text-align: left;
   text-justify: none;
@@ -97,17 +99,20 @@ a[level='4'] {
 }
 
 /*Section tags*/
-.section-tags ul {
+.section-tags ul,
+.subsection-tags ul {
     margin: 0px 0px 0px 0px;
     padding: 0px;
 }
-.section-tags-list li {
+.section-tags-list li,
+.subsection-tags-list li {
     margin: 0px 0px 0px 0px;
     display: inline;
     list-style-type: none;
 
 }
-.section-tags-list-element {
+.section-tags-list-element,
+.subsection-tags-list-element {
     margin: 2px 2px 2px 2px;
     padding: 0px 10px 0px 10px;
     background-color: #EECC66;
@@ -123,6 +128,7 @@ a[level='4'] {
     border-radius: 25px;
     color: #333333;
     white-space: pre-line;
+    display: inline-block;
 }
 
 /*Body text*/
