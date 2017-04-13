@@ -1,8 +1,8 @@
-## HTML Notebook
+## HTML Handbook
 
-HTML Notebook is a way to organise notes inside notebooks. They are linked together through tags. All notes are aggregated in a unique vertical column allowing to display and print it similarly to a true notebook.
+HTML Handbook is a way to organise notes inside handbooks. They are linked together through tags. All notes are aggregated in a unique vertical column allowing to display and print it similarly to a true handbook.
 
-Notes are called sections. They are grouped by volumes divided in chapters. Each elements are independent from the parent. For instance, if a section is defined in a chapter, to move it to another chapter, just displace the section file in our target chapter and regenerate the notebook structure. If you wish to display a notebook with a supplementary volume just add it in the notebook and regenerate the folder structure.
+Notes are called sections. They are grouped by volumes divided in chapters. Each elements are independent from the parent. For instance, if a section is defined in a chapter, to move it to another chapter, just displace the section file in our target chapter and regenerate the handbook structure. If you wish to display a handbook with a supplementary volume just add it in the handbook and regenerate the folder structure.
 
 ## Motivation
 
@@ -15,10 +15,10 @@ This second tools need only a Firefox browser (or the Tiddly Desktop software). 
 ## How to Use
 I provide an example in the sources. This example include all the structure that are handle.
 
-Notebooks are divided in several parts:
+Handbooks are divided in several parts:
 
     —The root HTML file and JavaScript are the engine of this tool. They manage to collect all the fragments and assemble them.
     —The CSS folder contains the document style for screens and paper.
     —The last part is the data. It represents all the notes and are divided between volumes, chapters and sections. This last element represents notes.
 
-The structure of the notebook is contained in a json file called ‘content.json’ and in the same folder that the notebook. This file can be handled by hand, but I recommend to use the jar file associated to the project. It is easier to use.
+The structure of the handbook is contained in a json file called ‘content.json’ and in the same folder that the handbook. This file can be handled by hand, but I recommend to use the jar file associated to the project. It is easier to use.
