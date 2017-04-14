@@ -1,1 +1,1 @@
-java -cp ./ContentFolder.jar notes.Main
+java -cp . notes.Main

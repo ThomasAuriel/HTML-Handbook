@@ -25,10 +25,13 @@ public class Main {
 		File dataDirectory = new File(dataFolderPath);
 
 		try {
+			//Get the path of the handbook
 			String absolutePath = dataDirectory.getAbsolutePath();
 
+			//Create the handbook structure
 			handbook.volumes.addAll(HierarchieFolder.createHandbook(absolutePath));
 
+			//Define the json file content
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			String json = gson.toJson(handbook);
 
@@ -38,6 +41,7 @@ public class Main {
 			json = json.replaceAll(Pattern.quote("\\\\"), "/");
 			json = json.replaceAll(Pattern.quote(absolutePath), ".");
 
+			//Save the content
 			File file = new File(outputFolder);
 			Files.write(Paths.get(file.getAbsolutePath()), json.getBytes());
 
