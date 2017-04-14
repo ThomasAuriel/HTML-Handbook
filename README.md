@@ -22,3 +22,7 @@ Handbooks are divided in several parts:
     —The last part is the data. It represents all the notes and are divided between volumes, chapters and sections. This last element represents notes.
 
 The structure of the handbook is contained in a json file called ‘content.json’ and in the same folder that the handbook. This file can be handled by hand, but I recommend to use the jar file associated to the project. It is easier to use.
+
+## Issues
+
+    —The MathJax library is unnecessary to large. Must be reduced. **If you do need MathJax you can remove it and remove associated code in the Note.html file.**

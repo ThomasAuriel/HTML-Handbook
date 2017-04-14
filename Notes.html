@@ -17,10 +17,16 @@
 	<script src="./js/d3-4.7.3/d3.js"></script>
 	<script src="./js/jquery-3.1.1.js"></script>
 	<script src="./js/jquery-csv/jquery.csv.js"></script>
+
+	<!-- Highlight code -->
+	<link rel="stylesheet" href="./js/highlight/styles/ascetic.css">
+	<script src="./js/highlight/highlight.pack.js"></script>
+
+
+	<!-- Math rendering -->
 	<script src="./js/katex/katex.js"></script>
 	<script src="./js/katex/katex.min.js"></script>
 	<script src="./js/katex/contrib/auto-render.min.js"></script>
-
 	<!-- Auto render equations -->
 	<script type="test/x-mathjax-config">
 		MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "AMS"} } }); //Autonumbering
@@ -55,10 +61,15 @@
 				value.innerHTML = value.innerHTML.autoLink()
 			})
 
-			//Format tables
+			//Format CSV tables
 			$('.csv-table').each(function(index, value){
 				convertCSVtoHTML(value)
 			})
+
+			// Highlight code
+			$('pre code').each(function(i, block) {
+				hljs.highlightBlock(block);
+			});
 
 			//Define header and footer for PDF documents
 			//defineHeader()

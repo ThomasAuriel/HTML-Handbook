@@ -5,6 +5,7 @@ body{
   font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "DejaVu Sans", sans-serif
   text-align: justify;
   text-justify: inter-word;
+  white-space: pre-line;
 }
 
 div {
@@ -151,6 +152,14 @@ a[level='4'] {
 }
 
 /* Quote */
+blockquote {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 0 0px;
+  font-size: 13px;
+  text-align: justify;
+  text-justify: inter-word;
+}
 .quote {
   display: block;
   padding: 9.5px;
