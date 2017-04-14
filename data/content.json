@@ -9,6 +9,26 @@
                 "a-Note",
                 "another-Note"
               ],
+              "path": "./data/aVolume/activity/data/activitySample.html",
+              "title": "Example of an Activity",
+              "shortTitle": "Example of an Activty",
+              "id": "an-activity",
+              "classElement": "section activity"
+            }
+          ],
+          "path": "./data/aVolume/activity/chap.html",
+          "title": "Activity",
+          "shortTitle": "Activity",
+          "id": "activity-chapter",
+          "classElement": "chapter"
+        },
+        {
+          "sections": [
+            {
+              "referencedSections": [
+                "a-Note",
+                "another-Note"
+              ],
               "path": "./data/aVolume/note/data/aNote.html",
               "title": "A Note",
               "shortTitle": "A Note",
@@ -30,26 +50,6 @@
           "title": "Notes",
           "shortTitle": "Notes",
           "id": "chapter-note",
-          "classElement": "chapter"
-        },
-        {
-          "sections": [
-            {
-              "referencedSections": [
-                "a-Note",
-                "another-Note"
-              ],
-              "path": "./data/aVolume/activity/data/activitySample.html",
-              "title": "Example of an Activity",
-              "shortTitle": "Example of an Activty",
-              "id": "an-activity",
-              "classElement": "section"
-            }
-          ],
-          "path": "./data/aVolume/activity/chap.html",
-          "title": "Activity",
-          "shortTitle": "Activity",
-          "id": "activity-chapter",
           "classElement": "chapter"
         }
       ],
@@ -87,7 +87,7 @@
       "title": "Example of an Activity",
       "shortTitle": "Example of an Activty",
       "id": "an-activity",
-      "classElement": "section"
+      "classElement": "section activity"
     },
     "another-Note": {
       "path": "./data/aVolume/note/data/anotherNote.html",
@@ -105,44 +105,44 @@
     }
   },
   "mapRefering": {
-    "a-Note": [
-      {
+    "a-Note": {
+      "A Note": {
         "path": "./data/aVolume/note/data/aNote.html",
         "title": "A Note",
         "shortTitle": "A Note",
         "id": "a-Note",
         "classElement": "section"
       },
-      {
+      "Another Note": {
         "path": "./data/aVolume/note/data/anotherNote.html",
         "title": "Another Note",
         "shortTitle": "Another Note",
         "id": "another-Note",
         "classElement": "section"
       },
-      {
+      "Example of an Activty": {
         "path": "./data/aVolume/activity/data/activitySample.html",
         "title": "Example of an Activity",
         "shortTitle": "Example of an Activty",
         "id": "an-activity",
-        "classElement": "section"
+        "classElement": "section activity"
       }
-    ],
-    "another-Note": [
-      {
+    },
+    "another-Note": {
+      "A Note": {
         "path": "./data/aVolume/note/data/aNote.html",
         "title": "A Note",
         "shortTitle": "A Note",
         "id": "a-Note",
         "classElement": "section"
       },
-      {
+      "Example of an Activty": {
         "path": "./data/aVolume/activity/data/activitySample.html",
         "title": "Example of an Activity",
         "shortTitle": "Example of an Activty",
         "id": "an-activity",
-        "classElement": "section"
+        "classElement": "section activity"
       }
-    ]
+    }
   }
 }

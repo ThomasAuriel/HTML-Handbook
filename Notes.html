@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<body title='A Simple Note'
-	author='Thomas Auriel'>
-
+<head>
 	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="./css/customCSS.css">
 
@@ -52,6 +50,9 @@
 			formatSubToC(json)
 
 			//Update solo tags
+			$('.subsection').each(function(index, subSection){
+				formatSubSection(subSection, json)
+			})
 			$('.tag').each(function(index, soloTag){
 				formatSoloTags(soloTag)
 			})
@@ -81,12 +82,12 @@
 		});
 
 	</script>
+</head>
 
-
+<body>
 	<div class="print-header"></div>
 	<div class='first-page'></div>
 	<div id='handbook'></div>
 	<div class="print-foot"></div>
-
 </body>
 </html>
