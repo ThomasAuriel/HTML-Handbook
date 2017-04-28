@@ -23,6 +23,11 @@ Handbooks are divided in several parts:
 
 The structure of the handbook is contained in a json file called ‘content.json’ and in the same folder that the handbook. This file can be handled by hand, but I recommend to use the jar file associated to the project. It is easier to use.
 
+## Tips
+Use only ASCII characters in the folder and file names (no special characters). Otherwise, the handbook could be loaded incorectly. Do the same for IDs.
+
+If the title of the handbook appears it mean that it is loaded correctly (regardly scripts). Indeed, it is the last element to be display. So if the first page is blank, something goes wrong in the loading process.
+
 ## Issues
 
-    —The MathJax library is unnecessary to large. Must be reduced. **If you do need MathJax you can remove it and remove associated code in the Note.html file.**
+The MathJax library is unnecessary to large. Must be reduced. **If you do need MathJax you can remove it and remove associated code in the Note.html file.**

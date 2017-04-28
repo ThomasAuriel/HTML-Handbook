@@ -28,8 +28,13 @@ public class FileParser {
 		section.shortTitle = sectionElement.attr("shortTitle");
 		section.classElement += (sectionElement.hasAttr("activity") ? (" activity") : (""));
 
-		String jsonToConvert = sectionElement.attr("referencedSection");
-		section.referencedSections = gson.fromJson(jsonToConvert, ArrayList.class);
+		try {
+			String jsonToConvert = sectionElement.attr("referencedSection");
+			section.referencedSections = gson.fromJson(jsonToConvert, ArrayList.class);
+		} catch (Exception e) {
+			System.err.println("Impossible to parse the json strucuture in the file : " + section.path);
+			e.printStackTrace();
+		}
 
 		Main.handbook.addIdElement(section.id, section);
 		for (String referedSection : section.referencedSections) {
