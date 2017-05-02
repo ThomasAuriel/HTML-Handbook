@@ -23,8 +23,15 @@ Handbooks are divided in several parts:
 
 The structure of the handbook is contained in a json file called ‘content.json’ and in the same folder that the handbook. This file can be handled by hand, but I recommend to use the jar file associated to the project. It is easier to use.
 
+## Tools
+Two tools are provided with this handbook.
+### ContentFolder 
+The ContentFolder tool is a jar which produce the json file structure necessary to load the handbook. Run it each time you do a change in the handbook which modify its structure (filename change, id change, new tags, etc.).
+### TinyMCE editor
+The TinyMCE editor is an editor which allow you to produce quickly static html pages.
+
 ## Tips
-Use only ASCII characters in the folder and file names (no special characters). Otherwise, the handbook could be loaded incorectly. Do the same for IDs.
+Use only ASCII characters in the folder and file names (no special characters). Otherwise, the handbook could be loaded incorectly. Do the same for ID tags.
 
 If the title of the handbook appears it mean that it is loaded correctly (regardly scripts). Indeed, it is the last element to be display. So if the first page is blank, something goes wrong in the loading process.
 
