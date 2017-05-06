@@ -2,16 +2,13 @@
 <html>
 
 <head>
+	<!-- CSS references -->
 	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="./css/customCSS.css">
 
-	<script src="./js/csvScripts.js"></script>
 	<script src="./js/fileScripts.js"></script>
-	<script src="./js/firstpageScripts.js"></script>
 	<script src="./js/loadingScripts.js"></script>
-	<script src="./js/tocScripts.js"></script>
 
-	<script src="./js/autolink.js"></script>
 	<script src="./js/d3-4.7.3/d3.js"></script>
 	<script src="./js/jquery-3.1.1.js"></script>
 	<script src="./js/jquery-csv/jquery.csv.js"></script>
@@ -19,7 +16,6 @@
 	<!-- Highlight code -->
 	<link rel="stylesheet" href="./js/highlight/styles/ascetic.css">
 	<script src="./js/highlight/highlight.pack.js"></script>
-
 
 	<!-- Math rendering -->
 	<script src="./js/katex/katex.js"></script>
@@ -31,53 +27,34 @@
 	</script>
 	<script type="text/javascript" src="./js/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
 
+	<!-- Marked rendering -->
+	<script src="./js/showdown/showdown.js"></script>
+
+
 	<script type="text/javascript">
 
 		$(document).ready(function()
 		{
 
-			// Load the JSON volume structure
-			var urlJSON = './data/content.json'
-			var jsonContentFile = getFileContent(urlJSON, "json", false)
-			var json = jQuery.parseJSON(jsonContentFile);
+			var urlData = './formatedHandbook.md'
 
-			//Load the handbook structure
-			$('#handbook').append(getFileContent('./data/handbook.html', 'html', false))
-			//Fill the handbook
-			loadHandbook($('#handbook')[0], json)
-			//Generate ToCs
-			formatGeneralToC(json)
-			formatSubToC(json)
+			document.getElementById('handbook').innerHTML = getFileContent(urlData, false)
 
-			//Update solo tags
-			$('.subsection').each(function(index, subSection){
-				formatSubSection(subSection, json)
-			})
-			$('.tag').each(function(index, soloTag){
-				formatSoloTags(soloTag, json)
-			})
-			
-			//Auto link all contents
-			$('div').each(function( index, value ) {
-				value.innerHTML = value.innerHTML.autoLink()
-			})
+			var converter = new showdown.Converter()
+			converter.setOption('noHeaderId', true);
+			converter.setOption('parseImgDimensions', true);
+			converter.setOption('simplifiedAutoLink', true);
+			converter.setOption('excludeTrailingPunctuationFromURLs', true);
+			converter.setOption('tables', true);
+			converter.setOption('tasklists', true);
+			converter.setOption('requireSpaceBeforeHeadingText', false);
+			converter.setOption('encodeEmails', true);
+			converter.setOption('ghCodeBlocks', true);
 
-			//Format CSV tables
-			$('.csv-table').each(function(index, value){
-				convertCSVtoHTML(value)
-			})
-
-			// Highlight code
-			$('code').each(function(i, block) {
-				hljs.highlightBlock(block);
-			});
-
-			//Define header and footer for PDF documents
-			//defineHeader()
-
-			//Define first page
-			$('.first-page').each(function(index, value){
-				formatFirstPage(value)
+			$('.markdown').each(function(index, element){
+				var text = element.innerHTML
+				var html = converter.makeHtml(text)
+				element.innerHTML = html
 			})
 		});
 
@@ -85,9 +62,7 @@
 </head>
 
 <body>
-	<div class="print-header"></div>
-	<div class='first-page'></div>
 	<div id='handbook'></div>
-	<div class="print-foot"></div>
 </body>
+
 </html>

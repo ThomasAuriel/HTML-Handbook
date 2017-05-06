@@ -1,7 +1,7 @@
 /**
 Synchronous load
 */
-function getFileContent(url, dataType, asynchronous){
+function getFileContent(url, asynchronous){
 
 	// Get API manual page : https://api.jquery.com/jquery.get/
 	// https://stackoverflow.com/questions/933713/is-there-a-version-of-getjson-that-doesnt-use-a-call-back
@@ -18,7 +18,7 @@ function getFileContent(url, dataType, asynchronous){
 	return  toReturn
 }
 
-function loadJSON(){
+function parseJSON(){
 	var jsonContentFile = getFileContent(urlJSON, "json", false)
 	var json = jQuery.parseJSON(jsonContentFile);
 }
