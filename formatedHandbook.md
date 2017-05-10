@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><handbook author="Thomas Auriel" dateFormat="dd-MM-YYYY" id="a-simple-handbook" title="A simple Handbook" version="Version 0.3"><headline><div class="first-page"><h1 class="first-page-title">A simple Handbook</h1><h2 class="first-page-author">Thomas Auriel</h2><h2 class="first-page-version">Version 0.3</h2><h2 class="first-page-date">06-05-2017</h2></div></headline><toc level="1"><h2 class="toc-title">Table of Content</h2><ul class="toc-list" level="1"><li class="toc-element"><a href="#presentation">Presentation</a></li><li class="toc-element"><a href="#elements">Elements</a></li><li class="toc-element"><a href="#mechanism">Mechanism</a></li></ul></toc><subcontent><note id="presentation" title="Presentation"><headline><h2><a class="fade-link-title" href="#presentation">#</a>Presentation</h2></headline><content class="markdown">
+<?xml version="1.0" encoding="UTF-8"?><handbook author="Thomas Auriel" dateFormat="dd-MM-YYYY" id="a-simple-handbook" title="A simple Handbook" version="Version 0.3"><headline><div class="first-page"><h1 class="first-page-title">A simple Handbook</h1><h2 class="first-page-author">Thomas Auriel</h2><h2 class="first-page-version">Version 0.3</h2><h2 class="first-page-date">10-05-2017</h2></div></headline><toc level="1"><h2 class="toc-title">Table of Content</h2><ul class="toc-list" level="1"><li class="toc-element"><a href="#presentation">Presentation</a></li><li class="toc-element"><a href="#elements">Elements</a></li><li class="toc-element"><a href="#mechanism">Mechanism</a></li></ul></toc><subcontent><note id="presentation" title="Presentation"><headline><h2><a class="fade-link-title" href="#presentation">#</a>Presentation</h2></headline><content class="markdown">
 This handbook is a tool which provide a simple handbook rendered through HTML.
 
 # Website
@@ -154,12 +154,12 @@ If you need to add file with a note, then you can add it in its folder. The only
 
 Example of a correct data structure
 ```
-data +
-     + handbook.md
-     + subnote1 +
-     +			+ subnote1.md
-	 + subnote2 +
-	            + subnote2.md
+data + handbook.md
+     |
+     + subnote1 + subnote1.md
+     |
+	 + subnote2 + subnote2.md
+                |
 	            + img.jpg
 ```
 
@@ -204,6 +204,8 @@ This tags are shown in the headline if the _tags_ structure is present.
 Tags allow to connect two notes. The note which contain the tags balise, refere targeted note and will appears in the section "Content in the document".
 
 </content><subcontent/><contentList/></note><note id="markdown" title="Markdown"><headline><h3><a class="fade-link-title" href="#markdown">#</a>Markdown</h3></headline><content class="markdown">
+
+![Markdown logo](./data/30-Mechanism/30-Markdown/markdownLogo.png =166x102)
 	
 According to the [official website](#https://daringfireball.net/projects/markdown/) :
 
@@ -217,6 +219,6 @@ According to the [official website](#https://daringfireball.net/projects/markdow
 
 For more information, the javascript API used in this handbook is **[Showdown](https://github.com/showdownjs/showdown)**
 
-You can also insert html balises in the content. However, be wared that it can be instable since CreateHandbook.jar use the java XML api [javax.xml.parsers.DocumentBuilder](https://docs.oracle.com/javase/7/docs/api/javax/xml/parsers/DocumentBuilder.html). But simple and most commun html balises should work.
+You can also insert html balises in the content. However, be wared that it can be instable since CreateHandbook.jar use the java XML api [javax.xml.parsers.DocumentBuilder](https://docs.oracle.com/javase/7/docs/api/javax/xml/parsers/DocumentBuilder.html). The balise img which is usually not closed, should be when you want add it. But simple and most commun other html balises should work.
 
 </content><subcontent/><contentList/></note></subcontent></note></subcontent></handbook>

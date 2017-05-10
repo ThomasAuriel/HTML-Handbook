@@ -2,6 +2,8 @@
 
 <headline/>
 <content>
+
+![Markdown logo](./data/30-Mechanism/30-Markdown/markdownLogo.png =166x102)
 	
 According to the [official website](#https://daringfireball.net/projects/markdown/) :
 
@@ -15,7 +17,7 @@ According to the [official website](#https://daringfireball.net/projects/markdow
 
 For more information, the javascript API used in this handbook is **[Showdown](https://github.com/showdownjs/showdown)**
 
-You can also insert html balises in the content. However, be wared that it can be instable since CreateHandbook.jar use the java XML api [javax.xml.parsers.DocumentBuilder](https://docs.oracle.com/javase/7/docs/api/javax/xml/parsers/DocumentBuilder.html). But simple and most commun html balises should work.
+You can also insert html balises in the content. However, be wared that it can be instable since CreateHandbook.jar use the java XML api [javax.xml.parsers.DocumentBuilder](https://docs.oracle.com/javase/7/docs/api/javax/xml/parsers/DocumentBuilder.html). The balise img which is usually not closed, should be when you want add it. But simple and most commun other html balises should work.
 
 </content>
 <subcontent/>

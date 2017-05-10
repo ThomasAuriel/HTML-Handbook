@@ -12,12 +12,12 @@ If you need to add file with a note, then you can add it in its folder. The only
 
 Example of a correct data structure
 ```
-data +
-     + handbook.md
-     + subnote1 +
-     +			+ subnote1.md
-	 + subnote2 +
-	            + subnote2.md
+data + handbook.md
+     |
+     + subnote1 + subnote1.md
+     |
+	 + subnote2 + subnote2.md
+                |
 	            + img.jpg
 ```
 
