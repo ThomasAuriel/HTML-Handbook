@@ -6,7 +6,7 @@ public class NoteElements {
 	public static final transient String balise_Handbook = "handbook";
 	public static final transient String balise_Head = "headline";
 	public static final transient String balise_ToC = "toc";
-	public static final transient String balise_ContentList = "contentList";
+	public static final transient String balise_ContentList = "contentlist";
 	public static final transient String balise_Content = "content";
 	public static final transient String balise_Subcontent = "subcontent";
 	// balises attributes
@@ -17,7 +17,7 @@ public class NoteElements {
 	public static final transient String balise_attribute_tags = "tags";
 	public static final transient String balise_attribute_date = "date";
 	public static final transient String balise_attribute_version = "version";
-	public static final transient String balise_attribute_dateFormat = "dateFormat";
+	public static final transient String balise_attribute_dateFormat = "dateforma";
 	public static final transient String balise_attribute_activity = "activity";
 
 }

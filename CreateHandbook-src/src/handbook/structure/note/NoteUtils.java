@@ -54,7 +54,9 @@ public class NoteUtils {
 		fadeLink.appendChild(Note.rootDocument.createTextNode("#"));
 
 		// Create the title
-		Element title = Note.rootDocument.createElement("h" + Math.min(note.indentation, 9));
+		// Element title = Note.rootDocument.createElement("h" +
+		// Math.min(note.indentation, 9));
+		Element title = Note.rootDocument.createElement("h2");
 		title.appendChild(fadeLink);
 		title.appendChild(Note.rootDocument.createTextNode(note.getTitle()));
 
@@ -93,7 +95,7 @@ public class NoteUtils {
 
 				tagList.appendChild(listElement);
 			}
-			
+
 			return tagList.hasChildNodes() ? tagList : null;
 
 		}
