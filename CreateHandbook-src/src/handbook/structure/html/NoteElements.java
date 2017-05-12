@@ -17,7 +17,7 @@ public class NoteElements {
 	public static final transient String balise_attribute_tags = "tags";
 	public static final transient String balise_attribute_date = "date";
 	public static final transient String balise_attribute_version = "version";
-	public static final transient String balise_attribute_dateFormat = "dateforma";
+	public static final transient String balise_attribute_dateFormat = "dateformat";
 	public static final transient String balise_attribute_activity = "activity";
 
 }
