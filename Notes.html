@@ -13,52 +13,71 @@
 	<script src="./js/jquery-3.1.1.js"></script>
 	<script src="./js/jquery-csv/jquery.csv.js"></script>
 
+	<!-- Marked rendering -->
+	<script src="./js/markdown-it/markdown-it.min.js"></script>
+	<script src="./js/markdown-it/markdown-it-math.min.js"></script>
+	<script src="./js/markdown-it/markdown-it-mathjax.js"></script>
+
 	<!-- Highlight code -->
 	<link rel="stylesheet" href="./js/highlight/styles/ascetic.css">
-	<script src="./js/highlight/highlight.pack.js"></script>
+	<script src="./js/highlight/highlight.js"></script>
 
-	<!-- Math rendering -->
-	<script src="./js/katex/katex.js"></script>
-	<script src="./js/katex/katex.min.js"></script>
-	<script src="./js/katex/contrib/auto-render.min.js"></script>
-	<!-- Auto render equations -->
-	<script type="test/x-mathjax-config">
-		MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "AMS"} } }); //Autonumbering
+	<!-- Mathjax -->
+	<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({
+		extensions: ["tex2jax.js"],
+		jax: ["input/TeX", "output/HTML-CSS"],
+		tex2jax: {
+			inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+			displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+		}
+	});
 	</script>
-	<script type="text/javascript" src="./js/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
-
-	<!-- Marked rendering -->
-	<script src="./js/showdown/showdown.js"></script>
-
+	<script src="./js/mathjax/MathJax.js?config=default"></script>
 
 	<script type="text/javascript">
 
-		$(document).ready(function()
-		{
+	$(document).ready(function()
+	{
 
-			var urlData = './formatedHandbook.md'
+		var urlData = './formatedHandbook.md'
 
-			document.getElementById('handbook').innerHTML = getFileContent(urlData, false)
+		document.getElementById('handbook').innerHTML = getFileContent(urlData, false)
 
-			var converter = new showdown.Converter()
-			converter.setOption('noHeaderId', true);
-			converter.setOption('parseImgDimensions', true);
-			converter.setOption('simplifiedAutoLink', true);
-			converter.setOption('excludeTrailingPunctuationFromURLs', true);
-			converter.setOption('tables', true);
-			converter.setOption('tasklists', true);
-			converter.setOption('requireSpaceBeforeHeadingText', false);
-			converter.setOption('encodeEmails', true);
-			converter.setOption('ghCodeBlocks', true);
-
-			$('.markdown').each(function(index, element){
-				var text = element.innerHTML
-				var html = converter.makeHtml(text)
-				element.innerHTML = html
+		var md = window.markdownit({
+			  html:         false,        // Enable HTML tags in source
+			  xhtmlOut:     false,        // Use '/' to close single tags (<br />).
+			                              // This is only for full CommonMark compatibility.
+			  breaks:       false,        // Convert '\n' in paragraphs into <br>
+			  langPrefix:   '',           // CSS language prefix for fenced blocks. Can be
+			                              // useful for external highlighters.
+			  linkify:      true          // Autoconvert URL-like text to links
 			})
+		md.use(markdownitMath, {
+			inlineOpen: '_$',
+			inlineClose: '$_',
+			blockOpen: '_$$',
+			blockClose: '$$_'
+		});
+		md.use(markdownitMathjax)
+
+		const env = {}
+		$('.markdown').each(function(index, element){
+			var text = element.innerHTML
+			var html = md.render(text, env)
+			env.highlighted === true
+			element.innerHTML = html
+		})
+
+		$(document).ready(function() {
+		  $('pre code').each(function(i, block) {
+		    hljs.highlightBlock(block);
+		  });
 		});
 
-	</script>
+	});
+
+</script>
 </head>
 
 <body>

@@ -21,4 +21,4 @@ Use only ASCII characters in the folder and file names (no special characters). 
 
 ## Issues
 
-The MathJax library is unnecessary too large (20MB). Must be reduced. If you do _not_ need MathJax you can remove it and remove associated code in the Note.html file.
+The MathJax library is unnecessary too large (51MB). Must be reduced. If you do _not_ need MathJax you can remove it and remove associated code in the Note.html file.

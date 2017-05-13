@@ -1,4 +1,4 @@
-<note id="note-type" title="Note Types" tags='[structures, balises]'>
+<note id="note-type" title="Note Types" tags='[structures, tags]'>
 
 <headline/>
 <content>

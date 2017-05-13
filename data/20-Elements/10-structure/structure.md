@@ -5,17 +5,17 @@
 
 Structures are the elements used to format notes.
 There are six different elements:
-- **content**
-	The content structure contains the text. This text is formed following the [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
++ **content**
+	The content structure contains the text. This text is formed following the [Markdown syntaxe](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 
-- **headline**
++ **headline**
 	Headline is an element which the position where the title of the note and the tag list should be written.
 
 	```html
-	<md/>
+	<headline/>
 	```
 
-- **toc**
++ **toc**
 	The toc tag defined where to write the Table of Content.
 	The toc tag accepts one [tag](#tags):
 	- **level**: The level represents the max depth of the Table of Content. It must be a **integer** and is **not an obligation**.
