@@ -40,7 +40,7 @@ public class Note {
 	 * @throws IOException
 	 */
 	public Note(File folder) {
-		this(folder, null);
+		this(folder, FolderUtils.getFileWithExtension(folder, ".md").get(0), null);
 	}
 
 	/**
@@ -50,10 +50,7 @@ public class Note {
 	 * @param indentation
 	 * @throws IOException
 	 */
-	public Note(File folder, Note parent) {
-
-		// Get the file path
-		filePath = FolderUtils.getFileWithExtension(folder, ".md").get(0);
+	public Note(File folder, File filePath, Note parent) {
 
 		try {
 
@@ -102,12 +99,17 @@ public class Note {
 				list.add(this);
 			}
 
-			// Find all the subcontent
+			// Find all subfolders
 			List<File> folders = FolderUtils.getFolders(folder);
 			for (File subfolder : folders) {
-				FolderUtils.getFolders(subfolder);
-				Note note = new Note(subfolder, this);
-				subNotes.add(note);
+
+				// Get the subfiles in each subfolders
+				List<File> subfilePaths = FolderUtils.getFileWithExtension(subfolder, ".md");
+
+				for (File subfilePath : subfilePaths) {
+					Note note = new Note(subfolder, subfilePath, this);
+					subNotes.add(note);
+				}
 			}
 
 		} catch (ParserConfigurationException e) {
@@ -116,11 +118,11 @@ public class Note {
 			e.printStackTrace();
 		} catch (SAXException e) {
 			System.out.println("Impossible to parse the file [" + this.filePath.getAbsolutePath()
-			+ "] in XML/HTML.\n Are you sure that the file structure is correct ?");
+					+ "] in XML/HTML.\n Are you sure that the file structure is correct ?");
 			e.printStackTrace();
 		} catch (IOException e) {
 			System.out.println("Impossible to parse the file [" + this.filePath.getAbsolutePath()
-			+ "] in XML/HTML.\n Are you sure that the file structure is correct ?");
+					+ "] in XML/HTML.\n Are you sure that the file structure is correct ?");
 			e.printStackTrace();
 		}
 

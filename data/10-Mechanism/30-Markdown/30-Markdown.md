@@ -15,11 +15,9 @@ According to the [official website](#https://daringfireball.net/projects/markdow
 + [Official website](https://daringfireball.net/projects/markdown/)
 + [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links)
 
-For more information, the JavaScript API used in this handbook is **[Markdown-it]**
+For more information, the JavaScript API used in this handbook is **[Showdown](https://github.com/showdownjs/showdown)**
 
 You can also insert HTML tags in the content. However, be warned that it can be unstable since CreateHandbook.jar use the java XML api [javax.xml.parsers.DocumentBuilder](https://docs.oracle.com/javase/7/docs/api/javax/xml/parsers/DocumentBuilder.html). The tag img which is usually not closed, should be when you want to use it. But simple and most other common HTML tags should work.
-
-[Markdown-it]:https://github.com/markdown-it/markdown-it
 
 </content>
 <subcontent/>
