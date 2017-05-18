@@ -11,6 +11,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import handbook.file.FileUtils;
@@ -157,7 +159,11 @@ public class Note {
 	}
 
 	public String getDate() {
-		return this.element.getAttribute(NoteElements.balise_attribute_date);
+		if (this.element.hasAttribute(NoteElements.balise_attribute_date))
+			return this.element.getAttribute(NoteElements.balise_attribute_date);
+		else if (this.element.hasAttribute(NoteElements.balise_attribute_activity))
+			return this.element.getAttribute(NoteElements.balise_attribute_activity);
+		return new String();
 	}
 
 	public String getDateFormat() {
@@ -175,6 +181,34 @@ public class Note {
 	public boolean isActivity() {
 		return this.element.hasAttribute(NoteElements.balise_attribute_activity);
 	}
+
+	public String getActivity() {
+		return this.element.getAttribute(NoteElements.balise_attribute_activity);
+	}
+
+	/*
+	 * Sub elements
+	 */
+
+	/**
+	 * Return the first calendar element.
+	 * 
+	 * @return
+	 */
+	public Element getCalendar() {
+		NodeList childNodes = element.getChildNodes();
+		for (int i = 0; i < childNodes.getLength(); i++) {
+			Node childNode = childNodes.item(i);
+			if (childNode instanceof Element && childNode.getNodeName().equals(NoteElements.balise_Calendar))
+				return (Element) childNode;
+		}
+
+		return null;
+	}
+
+	/*
+	 * 
+	 */
 
 	public static Map<String, Note> getIdelementmap() {
 		return idElementMap;

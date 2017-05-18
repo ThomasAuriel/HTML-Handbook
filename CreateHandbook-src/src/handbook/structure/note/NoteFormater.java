@@ -9,6 +9,7 @@ import org.w3c.dom.NodeList;
 
 import handbook.structure.html.HTMLElements;
 import handbook.structure.html.NoteElements;
+import handbook.structure.note.customstructure.CustomCalendar;
 
 public class NoteFormater {
 
@@ -32,6 +33,8 @@ public class NoteFormater {
 					formatSubContent(note, (Element) item);
 				} else if (item.getNodeName().equals(NoteElements.balise_ContentList)) {
 					formatContentList(note, (Element) item);
+				} else if (item.getNodeName().equals(NoteElements.balise_Calendar)) {
+					CustomCalendar.defineCustomCalendar(note, (Element) item);
 				}
 			}
 		}
@@ -165,7 +168,7 @@ public class NoteFormater {
 			}
 		else
 			toc.appendChild(Note.rootDocument.createTextNode("No sub-elements to display"));
-		
+
 	}
 
 	/**

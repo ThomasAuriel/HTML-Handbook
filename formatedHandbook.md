@@ -1,11 +1,83 @@
-<?xml version="1.0" encoding="UTF-8"?><handbook author="Thomas Auriel" dateFormat="dd-MM-YYYY" id="a-simple-handbook" title="A simple Handbook" version="Version 0.3"><headline><div class="first-page"><h1 class="first-page-title">A simple Handbook</h1><h2 class="first-page-author">Thomas Auriel</h2><h2 class="first-page-version">Version 0.3</h2></div></headline><toc level="1"><h2 class="toc-title">Table of Content</h2><ul class="toc-list" level="1"><li class="toc-element"><a href="#presentation">Presentation</a></li><li class="toc-element"><a href="#mechanism">Mechanism</a></li><li class="toc-element"><a href="#elements">Elements</a></li><li class="toc-element"><a href="#equations">Equations</a></li></ul></toc><subcontent><note id="presentation" title="Presentation"><headline><h2><a class="fade-link-title" href="#presentation">#</a>Presentation</h2></headline><content class="markdown">
+<handbook author="Thomas Auriel" dateFormat="dd-MM-YYYY" id="a-simple-handbook" title="A simple Handbook" version="Version 0.3">
+<headline>
+<div class="first-page">
+<h1 class="first-page-title">A simple Handbook</h1>
+<h2 class="first-page-author">Thomas Auriel</h2>
+<h2 class="first-page-version">Version 0.3</h2>
+</div>
+</headline>
+<toc level="1">
+<h2 class="toc-title">Table of Content</h2>
+<ul class="toc-list" level="1">
+<li class="toc-element">
+<a href="#presentation">Presentation</a>
+</li>
+<li class="toc-element">
+<a href="#mechanism">Mechanism</a>
+</li>
+<li class="toc-element">
+<a href="#elements">Elements</a>
+</li>
+<li class="toc-element">
+<a href="#equations">Equations</a>
+</li>
+<li class="toc-element">
+<a href="#calendar">Calendars</a>
+</li>
+</ul>
+</toc>
+<subcontent>
+<note id="presentation" title="Presentation">
+<headline>
+<h2>
+<a class="fade-link-title" href="#presentation">#</a>Presentation</h2>
+</headline>
+<content class="markdown">
 This handbook is a tool which provides a simple handbook rendered through HTML.
 
 # Website
 This tool is published on Github: https://github.com/ThomasAuriel/HTML-Handbook.
 
-</content><subcontent/></note><note id="mechanism" title="Mechanism"><headline><h2><a class="fade-link-title" href="#mechanism">#</a>Mechanism</h2></headline><toc level="2"><h3 class="toc-title">Table of Content</h3><ul class="toc-list" level="1"><li class="toc-element"><a href="#generation">Use the Jar to generate the final Markdown file</a></li><li class="toc-element"><a href="#datastructure">Data folder structure</a></li><li class="toc-element"><a href="#noteConnection">Note Connection</a></li><li class="toc-element"><a href="#markdown">Markdown</a></li></ul></toc><content class="markdown">
-</content><subcontent><note id="generation" tags="[datastructure]" title="Use the Jar to generate the final Markdown file"><headline><h2><a class="fade-link-title" href="#generation">#</a>Use the Jar to generate the final Markdown file</h2><ul class="tags-list"><li class="tags-list-element"><a class="tag" href="#datastructure">Data folder structure</a></li></ul></headline><content class="markdown">
+</content>
+<subcontent></subcontent>
+</note>
+<note id="mechanism" title="Mechanism">
+<headline>
+<h2>
+<a class="fade-link-title" href="#mechanism">#</a>Mechanism</h2>
+</headline>
+<toc level="2">
+<h3 class="toc-title">Table of Content</h3>
+<ul class="toc-list" level="1">
+<li class="toc-element">
+<a href="#generation">Use the Jar to generate the final Markdown file</a>
+</li>
+<li class="toc-element">
+<a href="#datastructure">Data folder structure</a>
+</li>
+<li class="toc-element">
+<a href="#noteConnection">Note Connection</a>
+</li>
+<li class="toc-element">
+<a href="#markdown">Markdown</a>
+</li>
+</ul>
+</toc>
+<content class="markdown">
+
+</content>
+<subcontent>
+<note id="generation" tags="[datastructure]" title="Use the Jar to generate the final Markdown file">
+<headline>
+<h2>
+<a class="fade-link-title" href="#generation">#</a>Use the Jar to generate the final Markdown file</h2>
+<ul class="tags-list">
+<li class="tags-list-element">
+<a class="tag" href="#datastructure">Data folder structure</a>
+</li>
+</ul>
+</headline>
+<content class="markdown">
 	
 The generate the final Markdown file, use the CreateHandbook.jar file.
 This file require Java 1.5 or higher to run it.
@@ -20,7 +92,16 @@ This file require Java 1.5 or higher to run it.
 
 The [data folder](#datastructure) must be in the same folder than the jar.
 
-</content><subcontent/><contentList/></note><note id="datastructure" title="Data folder structure"><headline><h2><a class="fade-link-title" href="#datastructure">#</a>Data folder structure</h2></headline><content class="markdown">
+</content>
+<subcontent></subcontent>
+<contentList></contentList>
+</note>
+<note id="datastructure" title="Data folder structure">
+<headline>
+<h2>
+<a class="fade-link-title" href="#datastructure">#</a>Data folder structure</h2>
+</headline>
+<content class="markdown">
 	
 The **data folder** contains all the data to display in the final Markdown file.
 
@@ -40,7 +121,21 @@ data + handbook.md
 	            + img.jpg
 ```
 
-</content><subcontent/><contentList/></note><note id="noteConnection" tags="[structures]" title="Note Connection"><headline><h2><a class="fade-link-title" href="#noteConnection">#</a>Note Connection</h2><ul class="tags-list"><li class="tags-list-element"><a class="tag" href="#structures">Structures</a></li></ul></headline><content class="markdown">
+</content>
+<subcontent></subcontent>
+<contentList></contentList>
+</note>
+<note id="noteConnection" tags="[structures]" title="Note Connection">
+<headline>
+<h2>
+<a class="fade-link-title" href="#noteConnection">#</a>Note Connection</h2>
+<ul class="tags-list">
+<li class="tags-list-element">
+<a class="tag" href="#structures">Structures</a>
+</li>
+</ul>
+</headline>
+<content class="markdown">
 
 **IDs**
 
@@ -80,7 +175,16 @@ Tags are a list of note ids.
 This tags are shown in the headline if the _tags_ structure is present.
 Tags allow the tool to connect two notes. The note which contains the tags tag, refers targeted notes and will appear in the section "Content in the document".
 
-</content><subcontent/><contentList/></note><note id="markdown" title="Markdown"><headline><h2><a class="fade-link-title" href="#markdown">#</a>Markdown</h2></headline><content class="markdown">
+</content>
+<subcontent></subcontent>
+<contentList></contentList>
+</note>
+<note id="markdown" title="Markdown">
+<headline>
+<h2>
+<a class="fade-link-title" href="#markdown">#</a>Markdown</h2>
+</headline>
+<content class="markdown">
 
 ![Markdown logo](./data/30-Mechanism/30-Markdown/markdownLogo.png =166x102)
 	
@@ -88,19 +192,61 @@ According to the [official website](#https://daringfireball.net/projects/markdow
 
 	Markdown is a text-to-HTML conversion tool for web writers. Markdown allows you to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML).
 
-	Thus, “Markdown” is two things: (1) a plain text formatting syntax; and (2) a software tool, written in Perl that converts the plain text formatting to HTML. See the Syntax page for details pertaining to Markdown’s formatting syntax. You can try it out, right now, using the online Dingus.
+	Thus, &ldquo;Markdown&rdquo; is two things: (1) a plain text formatting syntax; and (2) a software tool, written in Perl that converts the plain text formatting to HTML. See the Syntax page for details pertaining to Markdown&rsquo;s formatting syntax. You can try it out, right now, using the online Dingus.
 
 **In this handbook you only need to write your text according to the Markdown syntax.**
 + [Official website](https://daringfireball.net/projects/markdown/)
 + [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links)
 
-For more information, the JavaScript API used in this handbook is **[Showdown](https://github.com/showdownjs/showdown)**
+For more information, the JavaScript API used in this handbook is **[Markdown-it]**
 
 You can also insert HTML tags in the content. However, be warned that it can be unstable since CreateHandbook.jar use the java XML api [javax.xml.parsers.DocumentBuilder](https://docs.oracle.com/javase/7/docs/api/javax/xml/parsers/DocumentBuilder.html). The tag img which is usually not closed, should be when you want to use it. But simple and most other common HTML tags should work.
 
-</content><subcontent/><contentList/></note></subcontent></note><note id="elements" title="Elements"><headline><h2><a class="fade-link-title" href="#elements">#</a>Elements</h2></headline><toc level="2"><h3 class="toc-title">Table of Content</h3><ul class="toc-list" level="1"><li class="toc-element"><a href="#note-type">Note Types</a></li><li class="toc-element"><a href="#structures">Structures</a></li><li class="toc-element"><a href="#tags">Tags</a></li></ul></toc><content class="markdown">
+[Markdown-it]:https://github.com/markdown-it/markdown-it
+
+</content>
+<subcontent></subcontent>
+<contentList></contentList>
+</note>
+</subcontent>
+</note>
+<note id="elements" title="Elements">
+<headline>
+<h2>
+<a class="fade-link-title" href="#elements">#</a>Elements</h2>
+</headline>
+<toc level="2">
+<h3 class="toc-title">Table of Content</h3>
+<ul class="toc-list" level="1">
+<li class="toc-element">
+<a href="#note-type">Note Types</a>
+</li>
+<li class="toc-element">
+<a href="#structures">Structures</a>
+</li>
+<li class="toc-element">
+<a href="#tags">Tags</a>
+</li>
+</ul>
+</toc>
+<content class="markdown">
 To use this handbook, it is important to know the list of allowed elements.
-</content><subcontent><note id="note-type" tags="[structures, tags]" title="Note Types"><headline><h2><a class="fade-link-title" href="#note-type">#</a>Note Types</h2><ul class="tags-list"><li class="tags-list-element"><a class="tag" href="#structures">Structures</a></li><li class="tags-list-element"><a class="tag" href="#tags">Tags</a></li></ul></headline><content class="markdown">
+</content>
+<subcontent>
+<note id="note-type" tags="[structures, tags]" title="Note Types">
+<headline>
+<h2>
+<a class="fade-link-title" href="#note-type">#</a>Note Types</h2>
+<ul class="tags-list">
+<li class="tags-list-element">
+<a class="tag" href="#structures">Structures</a>
+</li>
+<li class="tags-list-element">
+<a class="tag" href="#tags">Tags</a>
+</li>
+</ul>
+</headline>
+<content class="markdown">
 
 There are three kinds of notes :
 
@@ -151,7 +297,21 @@ There are three kinds of notes :
 		</handbook>
 	```
 
-</content><subcontent/><contentList/></note><note id="structures" tags="[&quot;balises&quot;]" title="Structures"><headline><h2><a class="fade-link-title" href="#structures">#</a>Structures</h2><ul class="tags-list"><li class="tags-list-element"><a class="tag" href="#">NoNote&gt;balises</a></li></ul></headline><content class="markdown">
+</content>
+<subcontent></subcontent>
+<contentList></contentList>
+</note>
+<note id="structures" tags="[&quot;balises&quot;]" title="Structures">
+<headline>
+<h2>
+<a class="fade-link-title" href="#structures">#</a>Structures</h2>
+<ul class="tags-list">
+<li class="tags-list-element">
+<a class="tag" href="#">NoNote&gt;balises</a>
+</li>
+</ul>
+</headline>
+<content class="markdown">
 
 Structures are the elements used to format notes.
 There are six different elements:
@@ -162,7 +322,7 @@ There are six different elements:
 	Headline is an element which the position where the title of the note and the tag list should be written.
 
 	```html
-	<headline/>
+	<headline></headline>
 	```
 
 + **toc**
@@ -171,24 +331,38 @@ There are six different elements:
 	- **level**: The level represents the max depth of the Table of Content. It must be a **integer** and is **not an obligation**.
 
 	```md
-	<toc level="..."/>
+	<toc level="..."></toc>
 	```
 
 - **subcontent**
 	The subcontent structure indicates where sub-notes must be added.
 
 	```md
-	<subcontent/>
+	<subcontent></subcontent>
 	```
 
 - **contentlist**
 	The contentlist structure allows to show where the current note is used as a tag in the whole document.
 
 	```md
-	<contentlist/>
+	<contentlist></contentlist>
 	```
 
-</content><subcontent/><contentList/></note><note id="tags" tags="[structures]" title="Tags"><headline><h2><a class="fade-link-title" href="#tags">#</a>Tags</h2><ul class="tags-list"><li class="tags-list-element"><a class="tag" href="#structures">Structures</a></li></ul></headline><content class="markdown">
+</content>
+<subcontent></subcontent>
+<contentList></contentList>
+</note>
+<note id="tags" tags="[structures]" title="Tags">
+<headline>
+<h2>
+<a class="fade-link-title" href="#tags">#</a>Tags</h2>
+<ul class="tags-list">
+<li class="tags-list-element">
+<a class="tag" href="#structures">Structures</a>
+</li>
+</ul>
+</headline>
+<content class="markdown">
 
 Different tags exist.
 
@@ -212,7 +386,23 @@ tags="[id1, id2]"
 
 - **activity**: Activity is a tag used with notes elements. It allows users to define a note as an activity. This is used full to add a note which represents a temporal event.
 
-</content><subcontent/><contentList/></note></subcontent></note><note id="equations" tags="[markdown]" title="Equations"><headline><h2><a class="fade-link-title" href="#equations">#</a>Equations</h2><ul class="tags-list"><li class="tags-list-element"><a class="tag" href="#markdown">Markdown</a></li></ul></headline><content class="markdown">
+</content>
+<subcontent></subcontent>
+<contentList></contentList>
+</note>
+</subcontent>
+</note>
+<note id="equations" tags="[markdown]" title="Equations">
+<headline>
+<h2>
+<a class="fade-link-title" href="#equations">#</a>Equations</h2>
+<ul class="tags-list">
+<li class="tags-list-element">
+<a class="tag" href="#markdown">Markdown</a>
+</li>
+</ul>
+</headline>
+<content class="markdown">
 
 It is possible to write equations using this tools. To do this, you need to use the LaTeX syntax or the [ASCIIMath syntax].
 
@@ -272,4 +462,67 @@ $$x_{1.2} = \frac{-b \pm \sqrt{b^2 + 4 \cdot a \cdot c}}{2 \cdot a}$$
 
 [ASCIIMath Syntax]: https://runarberg.github.io/ascii2mathml/
 
-</content></note></subcontent></handbook>
+</content>
+</note>
+<note id="calendar" tags="[]" title="Calendars">
+<headline>
+<h2>
+<a class="fade-link-title" href="#calendar">#</a>Calendars</h2>
+</headline>
+<content class="markdown">
+## Frequence calendar
+It is possible to add a calendar showing the frequence of activities over years.
+
+In the next example, three activities are defined as sub-activities. The xml balise `<calendar></calendar>` indicates where the calendar is shown.
+</content>
+<calendar data="[{&quot;date&quot;:&quot;2015-01-01&quot;,&quot;id&quot;:&quot;activity-1&quot;},{&quot;date&quot;:&quot;2015-01-01&quot;,&quot;id&quot;:&quot;activity-2&quot;},{&quot;date&quot;:&quot;2015-01-02&quot;,&quot;id&quot;:&quot;activity-3&quot;}]" ending="2015" starting="2015"></calendar>
+<content class="markdown">
+### Limitations
+It is not possible to display a calendar directly in the content balise. However, it is possible to place this between to content balises.
+</content>
+<contentlist></contentlist>
+<hr>
+<subcontent>
+<note activity="2015-01-01" id="activity-1" tags="[]" title="Activity-1">
+<headline>
+<h2>
+<a class="fade-link-title" href="#activity-1">#</a>Activity-1</h2>
+</headline>
+<content class="markdown">
+
+
+</content>
+<contentlist></contentlist>
+<hr>
+<subcontent></subcontent>
+</note>
+<note activity="2015-01-01" id="activity-2" tags="[]" title="Activity-2">
+<headline>
+<h2>
+<a class="fade-link-title" href="#activity-2">#</a>Activity-2</h2>
+</headline>
+<content class="markdown">
+
+
+</content>
+<contentlist></contentlist>
+<hr>
+<subcontent></subcontent>
+</note>
+<note activity="2015-01-02" id="activity-3" tags="[]" title="Activity-3">
+<headline>
+<h2>
+<a class="fade-link-title" href="#activity-3">#</a>Activity-3</h2>
+</headline>
+<content class="markdown">
+
+
+</content>
+<contentlist></contentlist>
+<hr>
+<subcontent></subcontent>
+</note>
+</subcontent>
+</note>
+</subcontent>
+</handbook>
