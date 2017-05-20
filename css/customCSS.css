@@ -1,17 +1,15 @@
 
-body,
-content {
+body {
   color: #333333;
   margin: 20%;
   font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "DejaVu Sans", sans-serif
-  text-align: justify;
   text-justify: inter-word;
+  text-align: justify;
   white-space: pre-line;
 }
 
-div {
-  text-align: justify;
-  text-justify: inter-word;
+ul,li {
+  white-space: normal;
 }
 
 /*Headerline*/

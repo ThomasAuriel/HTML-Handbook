@@ -138,6 +138,11 @@ public class NoteFormater {
 	 */
 	public static void formatToC(Note note, Element tocElement) {
 
+		// If no sub-element, no tables of content are added.
+		if (note.subNotes.isEmpty()) {
+			return;
+		}
+
 		// Define the title of the Table of Content
 		Element tocTitle = Note.rootDocument.createElement("h" + Math.min(note.indentation + 1, 9));
 		tocTitle.setAttribute("class", HTMLElements.balise_class_tocTitle);
@@ -147,7 +152,6 @@ public class NoteFormater {
 		// Define the toc list.
 		Element toc = Note.rootDocument.createElement("ul");
 		toc.setAttribute("class", HTMLElements.balise_class_toc);
-		toc.setAttribute("level", "1");
 		tocElement.appendChild(toc);
 
 		// Determine the maxLevel
@@ -161,13 +165,10 @@ public class NoteFormater {
 		}
 
 		// Define entries.
-		if (!note.subNotes.isEmpty())
-			for (Note subNote : note.subNotes) {
-				Element tocEntry = formatToCEntry(subNote, 1, maxLevel);
-				toc.appendChild(tocEntry);
-			}
-		else
-			toc.appendChild(Note.rootDocument.createTextNode("No sub-elements to display"));
+		for (Note subNote : note.subNotes) {
+			Element tocEntry = formatToCEntry(subNote, 1, maxLevel);
+			toc.appendChild(tocEntry);
+		}
 
 	}
 
