@@ -1,5 +1,12 @@
-<handbook id="a-simple-handbook" title="A simple Handbook" author="Thomas Auriel" dateFormat="dd-MM-YYYY" version="Version 0.3">
-<headline/>
-<toc level="1"/>
-<subcontent/>
-</handbook>
+```
+title: A simple Handbook
+tag:
+ - a note
+ - a-second-note
+toc: 2
+date: dd/02/2017
+version: Version 0.4
+author: Thomas Auriel
+template: firstPage_template.html
+```
+# Handbook

@@ -2,89 +2,20 @@
 <html>
 
 <head>
+	<meta charset="utf-16"/>
 	<!-- CSS references -->
 	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="./css/customCSS.css">
+	<!-- highlight code -->
+	<link rel="stylesheet" href="./css/highlight/styles/tomorrow.css"/>
 
-	<script src="./js/fileScripts.js"></script>
-	<script src="./js/loadingScripts.js"></script>
+	<!-- Math rendering -->
+	<link rel="stylesheet" href="./css/math/katex/katex.min.css">
 
-	<script src="./js/d3-4.7.3/d3.js"></script>
 	<script src="./js/jquery-3.1.1.js"></script>
 	<script src="./js/jquery-csv/jquery.csv.js"></script>
 
-	<!-- Marked rendering -->
-	<script src="./js/markdown-it/markdown-it.min.js"></script>
-	<script src="./js/markdown-it/markdown-it-math.min.js"></script>
-	<script src="./js/markdown-it/markdown-it-mathjax.js"></script>
-
-	<!-- Highlight code -->
-	<link rel="stylesheet" href="./js/highlight/styles/ascetic.css">
-	<script src="./js/highlight/highlight.js"></script>
-
-	<!-- Mathjax -->
-	<script type="text/x-mathjax-config">
-	MathJax.Hub.Config({
-		extensions: ["tex2jax.js"],
-		jax: ["input/TeX", "output/HTML-CSS"],
-		tex2jax: {
-			inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-			displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
-		}
-	});
-	</script>
-	<script src="./js/mathjax/MathJax.js?config=default"></script>
-
-	<!-- Calendar -->
-	<script src="./js/d3-custom/d3-calendar.js"></script>
-
-	<script type="text/javascript">
-
-	$(document).ready(function()
-	{
-
-		var urlData = './formatedHandbook.md'
-
-		document.getElementById('handbook').innerHTML = getFileContent(urlData, false)
-
-		var md = window.markdownit({
-			  html:         false,        // Enable HTML tags in source
-			  xhtmlOut:     false,        // Use '/' to close single tags (<br />).
-			                              // This is only for full CommonMark compatibility.
-			  breaks:       false,        // Convert '\n' in paragraphs into <br>
-			  langPrefix:   '',           // CSS language prefix for fenced blocks. Can be
-			                              // useful for external highlighters.
-			  linkify:      true          // Autoconvert URL-like text to links
-			})
-		md.use(markdownitMath, {
-			inlineOpen: '_$',
-			inlineClose: '$_',
-			blockOpen: '_$$',
-			blockClose: '$$_'
-		});
-		md.use(markdownitMathjax)
-
-		const env = {}
-		$('.markdown').each(function(index, element){
-			var text = element.innerHTML
-			var html = md.render(text, env)
-			env.highlighted === true
-			element.innerHTML = html
-		})
-
-		//Highlight
-		// $(document).ready(function() {
-		//   $('pre code').each(function(i, block) {
-		//     hljs.highlightBlock(block);
-		//   });
-		// });
-
-		//format calendar
-		formatCalendar();
-
-	});
-
-</script>
+	<script src="./js/bundle.js"></script>
 </head>
 
 <body>

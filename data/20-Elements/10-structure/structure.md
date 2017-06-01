@@ -1,45 +1,42 @@
-<note id="structures" title="Structures" tags='["balises"]'>
+```
+title: Structure and Template
+id : template
+tag: 
+ - balises
+```
 
-<headline/>
-<content>
+This version of the HTML-handbook separate data from format.
+This allows to define a unique template for the whole document [TODO - will change in the futur].
 
-Structures are the elements used to format notes.
-There are six different elements:
-+ **content**
-	The content structure contains the text. This text is formed following the [Markdown syntaxe](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
-
-+ **headline**
-	Headline is an element which the position where the title of the note and the tag list should be written.
-
-	```html
+The structure of the standard format is :
+``` xml
+<element>
 	<headline/>
-	```
-
-+ **toc**
-	The toc tag defined where to write the Table of Content.
-	The toc tag accepts one [tag](#tags):
-	- **level**: The level represents the max depth of the Table of Content. It must be a **integer** and is **not an obligation**.
-
-	```md
-	<toc level='...'/>
-	```
-
-- **subcontent**
-	The subcontent structure indicates where sub-notes must be added.
-
-	```md
+	<tags/>
+	<toc/>
+	<content/>
+	<references/>
+	<hr/>
 	<subcontent/>
-	```
+</element>
+```
+## Structure
+Their is seven elements. By order of apparition:
 
-- **contentlist**
-	The contentlist structure allows to show where the current note is used as a tag in the whole document.
++ **element**: This tag is _necessary_ to interprete the template as the structure of an element.
 
-	```md
-	<contentlist/>
-	```
++ **headline**: Headline indicates to the handbook where the headline of a note should be placed. This headline will contain the title of the note, the author and the version of the note.
 
-</content>
-<subcontent/>
-<contentList/>
++ **tags**: This balise indicates to the handbook where to display tags. It will contain the list of tags.
 
-</note>
++ **toc**: This balise indicates where to place the _table of content_.
+
++ **content**: The content structure contains the text. This text is formed following the [Markdown syntaxe](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
+
++ **reference**: This balise indicates where the references are displayed.
+
+- **subcontent**: The subcontent structure indicates where sub-notes must be added.
+
+## Modification of the template
+By modifying this template you update all the notes. This provide a way to get a WYSIWYM editor. In other words, this architecture allows you to update the whole handbook structure with you need to modify each note to match your new template.
+It is possible to reorder the tags and to add text.

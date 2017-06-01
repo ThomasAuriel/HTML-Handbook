@@ -1,0 +1,21 @@
+sudo docker rmi browserify-i \
+&& \
+sudo docker build -t browserify-i . \
+&& \
+sudo docker run \
+       -it \
+       --rm \
+       -v "$PWD":/browserify \
+       --name browserify-container \
+       browserify-i \
+       browserify -r jquery \
+                  -r markdown-it \
+                  -r markdown-it-checkbox \
+                  -r markdown-it-imsize \
+                  -r markdown-it-highlightjs \
+                  -r markdown-it-katex \
+                  -r markdown-it-math \
+                  -r ascii2mathml \
+                  -r babelify \
+                  -r markdown-it-video \
+                  /browserify/main.js -o /browserify/bundle.js
