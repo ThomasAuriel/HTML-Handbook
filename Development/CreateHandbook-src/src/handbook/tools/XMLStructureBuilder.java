@@ -81,7 +81,7 @@ public class XMLStructureBuilder {
 
 		// Define the version
 		String versionString = note.version;
-		if (!versionString.isEmpty()) {
+		if (versionString != null) {
 			Element version = note.xmlElement.getOwnerDocument().createElement("h2");
 			version.appendChild(note.xmlElement.getOwnerDocument().createTextNode(versionString));
 			version.setAttribute("class", HTMLElements.balise_class_firstPageVersion);
@@ -90,7 +90,7 @@ public class XMLStructureBuilder {
 
 		// Define the date
 		String dateString = note.date;
-		if (!dateString.isEmpty()) {
+		if (dateString != null) {
 			Element date = note.xmlElement.getOwnerDocument().createElement("h2");
 			date.appendChild(note.xmlElement.getOwnerDocument().createTextNode(Utils.formatDate(dateString)));
 			date.setAttribute("class", HTMLElements.balise_class_firstPageDate);
