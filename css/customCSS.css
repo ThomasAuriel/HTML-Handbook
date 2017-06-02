@@ -6,11 +6,9 @@ body {
   text-justify: inter-word;
   text-align: justify;
 }
-
-ul,li {
-  list-style-type: none;
+li {
+  padding: 10px 0px 0px 0px;
 }
-
 /*Headerline*/
 /** First page **/
 .first-page{
@@ -41,14 +39,6 @@ ul,li {
 
 .toc-list li{
   list-style-type: none;
-}
-
-.toc-list[level='1']{
-  padding: 0px 10% 0px 10%;
-  border-style: solid;
-  border-left-color: #fff;
-  border-right-color: #fff;
-  border-width: 1px;
 }
 
 /* Tags */

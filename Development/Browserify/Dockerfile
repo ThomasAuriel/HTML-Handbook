@@ -10,6 +10,7 @@ RUN npm install --save highlight
 
 RUN npm install --save markdown-it
 RUN npm install --save markdown-it-checkbox
+RUN npm install --save markdown-it-footnote
 RUN npm install --save markdown-it-imsize
 RUN npm install --save markdown-it-highlightjs
 RUN npm install --save markdown-it-katex

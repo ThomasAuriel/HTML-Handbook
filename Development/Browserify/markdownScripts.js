@@ -26,6 +26,8 @@ module.exports = {
 
 		// Checkboxes
 		md.use(require('markdown-it-checkbox'));
+		// Footnotes
+		md.use(require('markdown-it-footnote'));
 
 		//Highlight
 		md.use(require('markdown-it-highlightjs'));
