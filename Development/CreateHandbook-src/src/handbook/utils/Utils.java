@@ -7,16 +7,6 @@ import java.util.Date;
 public class Utils {
 
 	/**
-	 * Create an id for a
-	 * 
-	 * @param input
-	 * @return
-	 */
-	public static String createId(String title) {
-		return title.replaceAll("[^\\p{ASCII}]|[\\s]+", "").toLowerCase();
-	}
-
-	/**
 	 * Format the current date following the dateFormat provided.
 	 * 
 	 * @param dateFormat

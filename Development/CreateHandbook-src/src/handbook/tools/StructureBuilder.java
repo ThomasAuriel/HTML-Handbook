@@ -66,7 +66,7 @@ public class StructureBuilder {
 			}
 			return note;
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.err.println("Impossible to read the file : " + markdownFile.getPath());
 			e.printStackTrace();
 		}
@@ -113,7 +113,7 @@ public class StructureBuilder {
 					setStructure(subFolder, note);
 				}
 
-			} catch (IOException e) {
+			} catch (Exception e) {
 				System.err.println("Impossible to read the file : " + markdownFile.getPath());
 				e.printStackTrace();
 			}
@@ -152,7 +152,7 @@ public class StructureBuilder {
 		// IDs
 		String id = (String) yamlElements.get(NoteElements.balise_attribute_id);
 		if (id == null || id.isEmpty())
-			id = Utils.createId(title);
+			id = title;
 		String template = (String) yamlElements.get(NoteElements.balise_attribute_template);
 		// Tags
 		List<String> tags = (List<String>) yamlElements.get(NoteElements.balise_attribute_tags);
