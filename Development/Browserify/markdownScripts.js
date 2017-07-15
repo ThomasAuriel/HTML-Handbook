@@ -5,7 +5,7 @@ module.exports = {
 			  html:         true,        // Enable HTML tags in source
 			  xhtmlOut:     false,        // Use '/' to close single tags (<br />).
 			                              // This is only for full CommonMark compatibility.
-			  breaks:       false,        // Convert '\n' in paragraphs into <br>
+			  breaks:       true,        // Convert '\n' in paragraphs into <br>
 			  langPrefix:   '',           // CSS language prefix for fenced blocks. Can be
 			                              // useful for external highlighters.
 			  linkify:      true,         // Autoconvert URL-like text to links
@@ -40,7 +40,7 @@ module.exports = {
 
 		const env = {}
 		$('.markdown').each(function(index, element){
-			var text = element.innerHTML;
+			var text = element.textContent;
 			var html = md.render(text, env);
 			env.highlighted === true;
 			element.innerHTML = html;

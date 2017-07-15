@@ -1,11 +1,7 @@
 package handbook.utils.xml;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.StringReader;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -23,6 +19,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import handbook.note.Note;
+import handbook.view.HandbookUI;
 
 public class XMLUtils {
 
@@ -57,7 +54,7 @@ public class XMLUtils {
 			// write the content into xml file
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
-			transformer.setOutputProperty(OutputKeys.METHOD, "html");
+			// transformer.setOutputProperty(OutputKeys.METHOD, "html");
 
 			// Add new line after each balises. Easier to read.
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -72,7 +69,7 @@ public class XMLUtils {
 		} catch (TransformerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Impossible to convert the final note or impossible to write the file at : "
+			HandbookUI.addMessage("Impossible to convert the final note or impossible to write the file at : "
 					+ output.getAbsolutePath());
 		}
 	}

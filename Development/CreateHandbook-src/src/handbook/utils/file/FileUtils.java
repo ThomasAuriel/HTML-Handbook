@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import handbook.view.HandbookUI;
+
 public class FileUtils {
 
 	/**
@@ -47,7 +49,7 @@ public class FileUtils {
 		try {
 			Files.write(Paths.get(file.getAbsolutePath()), content.getBytes());
 		} catch (IOException e) {
-			System.out.println("Impossible to write the file at : " + file.getAbsolutePath());
+			HandbookUI.addMessage("Impossible to write the file at : " + file.getAbsolutePath());
 		}
 	}
 

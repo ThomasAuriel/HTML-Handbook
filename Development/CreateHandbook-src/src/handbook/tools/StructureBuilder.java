@@ -19,21 +19,22 @@ import handbook.utils.Utils;
 import handbook.utils.file.FileUtils;
 import handbook.utils.file.FolderUtils;
 import handbook.utils.template.TemplateUtils;
+import handbook.view.HandbookUI;
 
 public class StructureBuilder {
 
 	/*
-	 * \\A: must be at the begging [\\s]*: can be preceded by white-space
-	 * characters but not by text character `{3,}: must be preceded by three `
-	 * characters [ \\s: white-space \\S: any-character ]*: can contain any
-	 * characters `{3,}: must be followed by three ` characters
+	 * \\A: must be at the begging [\\s]*: can be preceded by white-space characters
+	 * but not by text character `{3,}: must be preceded by three ` characters [
+	 * \\s: white-space \\S: any-character ]*: can contain any characters `{3,}:
+	 * must be followed by three ` characters
 	 */
 	private final static String defaultRegexMetadata = "\\A[\\s]*`{3,}([\\s\\S]*?)`{3,}";
 	private final static Pattern pattern = Pattern.compile(defaultRegexMetadata);
 
 	/**
-	 * Create the note structure from a root note. This element will be handle
-	 * as the handbook.
+	 * Create the note structure from a root note. This element will be handle as
+	 * the handbook.
 	 * 
 	 * @param folder
 	 * @return
@@ -144,7 +145,7 @@ public class StructureBuilder {
 		try {
 			yamlElements = Yaml.loadType(metadata, HashMap.class);
 		} catch (Exception ex) {
-			System.err.println("An error occured during reading metadata of the file " + markdownFile.getPath());
+			HandbookUI.addMessage("An error occured during reading metadata of the file " + markdownFile.getPath());
 			throw ex;
 		}
 
@@ -169,7 +170,8 @@ public class StructureBuilder {
 		String activityDate = (String) yamlElements.get(NoteElements.balise_attribute_activity);
 
 		// Create the note
-		return new Note(markdownFile, parent, title, id, template, tags, tocLevel, author, date, version, activityDate, content);
+		return new Note(markdownFile, parent, title, id, template, tags, tocLevel, author, date, version, activityDate,
+				content);
 	}
 
 	/**

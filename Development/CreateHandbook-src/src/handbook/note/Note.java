@@ -53,8 +53,8 @@ public class Note {
 	 * @param activityDate
 	 * @param content
 	 */
-	public Note(File filePath, Note parent, String title, String id, String template, List<String> tags, int tocLevel, String author,
-			String date, String version, String activityDate, String content) {
+	public Note(File filePath, Note parent, String title, String id, String template, List<String> tags, int tocLevel,
+			String author, String date, String version, String activityDate, String content) {
 
 		this.filePath = filePath;
 
