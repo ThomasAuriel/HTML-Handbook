@@ -24,28 +24,6 @@ th, td {
     padding: 5px;
     text-align: left;
 }
-/*Headerline*/
-/** First page **/
-.first-page{
-  padding: 0px 0px 30% 0px;
-  page-break-after: always;
-}
-.first-page-title{
-  padding: 0px 0px 10% 0px;
-  page-break-after: always;
-}
-.first-page-author{
-  padding: 0px 0px 0% 0px;
-  page-break-after: always;
-}
-.first-page-version{
-  padding: 0px 0px 0% 0px;
-  page-break-after: always;
-}
-.first-page-date{
-  padding: 0px 0px 0% 0px;
-  page-break-after: always;
-}
 
 /* Elements */
 /* Title */
@@ -60,6 +38,25 @@ h1 {
   .fade-link-title {
     display: none;
   }
+}
+
+/*Headerline*/
+/** First page **/
+.first-page{
+  padding: 30% 0px 0px 0px;
+  page-break-after: always;
+}
+.first-page-title{
+  padding: 10% 0px 0px 0px;
+}
+.first-page-author{
+  padding: 0px 0px 0px 0px;
+}
+.first-page-version{
+  padding: 0px 0px 0px 0px;
+}
+.first-page-date{
+  padding: 0px 0px 0px 0px;
 }
 
 /*Table of Content (ToC)*/
