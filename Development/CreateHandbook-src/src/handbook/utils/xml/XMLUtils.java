@@ -47,8 +47,9 @@ public class XMLUtils {
 	 * 
 	 * @param note
 	 * @param output
+	 * @throws TransformerException 
 	 */
-	public static void writeFile(Note note, File output) {
+	public static void writeFile(Note note, File output) throws TransformerException {
 		try {
 
 			// write the content into xml file
@@ -67,10 +68,9 @@ public class XMLUtils {
 
 			transformer.transform(source, result);
 		} catch (TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			HandbookUI.addMessage("Impossible to convert the final note or impossible to write the file at : "
 					+ output.getAbsolutePath());
+			throw e;
 		}
 	}
 

@@ -34,7 +34,7 @@ public class FileUtils {
 		try {
 			return new String(Files.readAllBytes(file.toPath()));
 		} catch (IOException e) {
-			System.err.println("Impossible to read : " + file.getName() + " [" + file.toPath() + "]");
+			HandbookUI.addMessage("Impossible to read : " + file.getName() + " [" + file.toPath() + "]");
 			throw e;
 		}
 	}
@@ -44,12 +44,14 @@ public class FileUtils {
 	 * 
 	 * @param file
 	 * @param content
+	 * @throws IOException 
 	 */
-	public static void writeFile(File file, String content) {
+	public static void writeFile(File file, String content) throws IOException {
 		try {
 			Files.write(Paths.get(file.getAbsolutePath()), content.getBytes());
 		} catch (IOException e) {
 			HandbookUI.addMessage("Impossible to write the file at : " + file.getAbsolutePath());
+			throw e;
 		}
 	}
 

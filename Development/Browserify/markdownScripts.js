@@ -17,12 +17,8 @@ module.exports = {
 			inlineOpen: '_$',
 			inlineClose: '$_',
 			blockOpen: '_$$',
-			blockClose: '$$_',
-			renderingOptions: {},
-			inlineRenderer: require('ascii2mathml'),
-			blockRenderer: require('ascii2mathml')
+			blockClose: '$$_'
 		});
-		md.use(require('markdown-it-katex'));
 
 		// Checkboxes
 		md.use(require('markdown-it-checkbox'));
@@ -33,7 +29,7 @@ module.exports = {
 		md.use(require('markdown-it-highlightjs'));
 
 		//Images
-		// md.use(require('markdown-it-imsize'), { autofill: true });
+		// md.use(require('markdown-it-imsize'), { autofill: false });
 		//Video
 		md.use(require('markdown-it-video'));
 

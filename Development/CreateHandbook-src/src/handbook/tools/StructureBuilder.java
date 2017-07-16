@@ -1,17 +1,13 @@
 package handbook.tools;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.ho.yaml.Yaml;
-import org.xml.sax.SAXException;
 
 import handbook.note.Note;
 import handbook.note.NoteElements;
@@ -44,34 +40,19 @@ public class StructureBuilder {
 		List<File> markdownFiles = FolderUtils.getFileWithExtension(folder, ".md");
 		File markdownFile = markdownFiles.get(0);
 
-		try {
-			// Create the node based on the file
-			Note note = createNote(null, markdownFile);
+		// Create the node based on the file
+		Note note = createNote(null, markdownFile);
 
-			// Create the xml element
-			try {
-				TemplateUtils.createXMLElementNote(note);
-			} catch (ParserConfigurationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SAXException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		// Create the xml element
+		TemplateUtils.createXMLElementNote(note);
 
-			// Determine the subcontent
-			List<File> subFolders = FolderUtils.getFolders(folder);
-			for (int j = 0; j < subFolders.size(); j++) {
-				File subFolder = subFolders.get(j);
-				setStructure(subFolder, note);
-			}
-			return note;
-
-		} catch (Exception e) {
-			System.err.println("Impossible to read the file : " + markdownFile.getPath());
-			e.printStackTrace();
+		// Determine the subcontent
+		List<File> subFolders = FolderUtils.getFolders(folder);
+		for (int j = 0; j < subFolders.size(); j++) {
+			File subFolder = subFolders.get(j);
+			setStructure(subFolder, note);
 		}
-		return null;
+		return note;
 	}
 
 	/**
@@ -87,39 +68,28 @@ public class StructureBuilder {
 		for (int i = 0; i < markdownFiles.size(); i++) {
 			File markdownFile = markdownFiles.get(i);
 
-			try {
-				// Create the node based on the file
-				Note note = createNote(parent, markdownFile);
+			// Create the node based on the file
+			Note note = createNote(parent, markdownFile);
 
-				// And store it in the parent if it exists
-				if (parent != null) {
-					parent.subContent.add(note);
-				}
-
-				// Create the xml element
-				try {
-					TemplateUtils.createXMLElementNote(note);
-				} catch (ParserConfigurationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SAXException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				// Determine the subcontent
-				List<File> subFolders = FolderUtils.getFolders(folder);
-				for (int j = 0; j < subFolders.size(); j++) {
-					File subFolder = subFolders.get(j);
-					setStructure(subFolder, note);
-				}
-
-			} catch (Exception e) {
-				System.err.println("Impossible to read the file : " + markdownFile.getPath());
-				e.printStackTrace();
+			// And store it in the parent if it exists
+			if (parent != null) {
+				parent.subContent.add(note);
 			}
 
+			// Create the xml element
+			TemplateUtils.createXMLElementNote(note);
+
+			// Determine the subcontent
+			List<File> subFolders = FolderUtils.getFolders(folder);
+			for (int j = 0; j < subFolders.size(); j++) {
+				File subFolder = subFolders.get(j);
+				setStructure(subFolder, note);
+			}
+
+			System.err.println("Impossible to read the file : " + markdownFile.getPath());
+
 		}
+
 	}
 
 	/**

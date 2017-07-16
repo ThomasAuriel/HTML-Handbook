@@ -1,13 +1,28 @@
 
 body {
-  color: #333333;
-  margin: 20%;
+  color: #46454D;
+  width: 700px ;
+  margin-left: auto ;
+  margin-right: auto ;
   font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "DejaVu Sans", sans-serif
   text-justify: inter-word;
   text-align: justify;
 }
 li {
   padding: 10px 0px 0px 0px;
+}
+
+/* Table */
+table {
+    width: 100%;
+    padding: 10%;
+    border: 1px solid #CFCFCF;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #CFCFCF;
+    padding: 5px;
+    text-align: left;
 }
 /*Headerline*/
 /** First page **/
@@ -32,6 +47,21 @@ li {
   page-break-after: always;
 }
 
+/* Elements */
+/* Title */
+h1 {
+  padding-top: 100px;
+}
+.fade-link-title {
+  color: #D6D5DA;
+  margin-left:-20px;
+}
+@media print {
+  .fade-link-title {
+    display: none;
+  }
+}
+
 /*Table of Content (ToC)*/
 .toc-list {
   padding: 0px 0px 0px 10%;
@@ -42,9 +72,9 @@ li {
 }
 
 /* Tags */
-.tags-list,
+/* Previous version */
+/*.tags-list,
 .tags-list-element{
-  /* Do not justify to do not strech tags */
   padding: 0px 0px 0px 0px;
   text-align: left;
   text-justify: none;
@@ -59,6 +89,32 @@ li {
     background-color: #EECC66;
     border-radius: 25px;
     color: #333333;
+    white-space: pre-line;
+    display: inline-block;
+}*/
+
+.tags-list,
+.tags-list-element{
+  padding: 0px 0px 0px 0px;
+  text-align: left;
+  text-justify: none;
+  page-break-inside: avoid;
+  list-style-type: none;
+  display: inline-block;
+}
+
+.tags-list::before {
+  content: "Tags: ";
+  font-weight: bold;
+}
+.tags-list-element:after {
+  content: ", ";
+}
+.tags-list-element:last-child:after {
+    content: "";
+}
+
+.tag {
     white-space: pre-line;
     display: inline-block;
 }
@@ -141,5 +197,5 @@ iframe {
   div.print-foot:after {
     counter-increment: page;
     content: counter(page);
-}
+  }
 }

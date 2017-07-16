@@ -9,13 +9,13 @@ sudo docker run \
        --name browserify-container \
        browserify-i \
        browserify -r jquery \
+                  -r mathjax \
                   -r markdown-it \
                   -r markdown-it-checkbox \
                   -r markdown-it-imsize \
                   -r markdown-it-highlightjs \
-                  -r markdown-it-katex \
                   -r markdown-it-math \
+                  -r markdown-it-video \
                   -r ascii2mathml \
                   -r babelify \
-                  -r markdown-it-video \
                   /browserify/main.js -o /browserify/bundle.js

@@ -15,6 +15,7 @@ import org.xml.sax.SAXException;
 import handbook.note.Note;
 import handbook.utils.file.FileUtils;
 import handbook.utils.xml.XMLUtils;
+import handbook.view.HandbookUI;
 
 public class TemplateUtils {
 
@@ -34,31 +35,46 @@ public class TemplateUtils {
 			}
 			return template;
 		} catch (IOException e) {
-			System.err.println("The template " + templatePath + " is not readable or absent or empty.");
+			HandbookUI.addMessage("The template " + templatePath + " is not readable or absent or empty.");
 			throw e;
 		}
 	}
 
 	/**
 	 * Create a xml element according to the template structure. The element is
-	 * define in the same document than the parent xml element if the parent
-	 * exist.
+	 * define in the same document than the parent xml element if the parent exist.
 	 * 
 	 * @param note
 	 * @throws ParserConfigurationException
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	public static void createXMLElementNote(Note note) throws ParserConfigurationException, SAXException, IOException {
+	public static void createXMLElementNote(Note note) throws IOException, SAXException, ParserConfigurationException {
 
 		// Get the template path stored in the node else get the standard
 		// template.
 		String tpath = (note.template == null || note.template.isEmpty()) ? templatePath : note.template;
 
 		// Load the template
-		String template = loadTemplate(tpath);
+		String template;
+		try {
+			template = loadTemplate(tpath);
+		} catch (IOException e) {
+			HandbookUI.addMessage("Impossible to load the template : " + tpath);
+			throw e;
+		}
 
-		Document xmlElement = XMLUtils.parseXML(template);
+		Document xmlElement;
+		try {
+			xmlElement = XMLUtils.parseXML(template);
+		} catch (ParserConfigurationException e) {
+			HandbookUI.addMessage(
+					"Impossible to parse the template : " + template + "nCheck that the tags are correctly closed.");
+			throw e;
+		} catch (SAXException e) {
+			HandbookUI.addMessage("Impossible to parse the template : " + template);
+			throw e;
+		}
 		note.xmlElement = (Element) xmlElement.getChildNodes().item(0);
 		if (note.parent != null) {
 			Node adoptNode = note.parent.xmlElement.getOwnerDocument().adoptNode(note.xmlElement);
