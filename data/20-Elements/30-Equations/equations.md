@@ -6,6 +6,8 @@ tag:
 
 It is possible to write equations using this tools. To do this, you need to use the LaTeX syntax or the [ASCIIMath syntax].
 
+**To use MathJax and then display equations, please unzip MathJax from the zip in the `./js` folder.**
+
 ## Libraries used
 
 ### ASCIIMath

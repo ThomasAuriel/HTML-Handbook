@@ -19,4 +19,5 @@ This second tools need only a _Firefox browser_. Using only Firefox as renderer 
 I provide documentation in the sources. Since this documentation use the tool, it is also a complete example.
 
 ## Tips
-Use only ASCII characters in the folder and file names (no special characters). Otherwise, the handbook could be loaded incorectly. Do the same for ID tags.
+1. Use only ASCII characters in the folder and file names (no special characters). Otherwise, the handbook could be loaded incorectly. Do the same for ID tags.
+2. To be able to write and use mathematical equation, please unzip MathJax from its zip in `./js` .

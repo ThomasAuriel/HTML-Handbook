@@ -33,6 +33,9 @@ module.exports = {
 		//Video
 		md.use(require('markdown-it-video'));
 
+		//Graph
+		md.use(require('markdown-it-mermaid'));
+
 
 		const env = {}
 		$('.markdown').each(function(index, element){

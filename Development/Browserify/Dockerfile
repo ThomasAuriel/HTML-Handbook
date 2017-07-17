@@ -12,6 +12,7 @@ RUN npm install --save markdown-it-footnote
 RUN npm install --save markdown-it-imsize
 RUN npm install --save markdown-it-highlightjs
 RUN npm install --save markdown-it-math
+RUN npm install --save markdown-it-mermaid
 RUN npm install --save markdown-it-video
 
 RUN npm install --save highlight

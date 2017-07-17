@@ -9,4 +9,3 @@ version: Version 0.4
 author: Thomas Auriel
 template: firstPage_template.html
 ```
-# Handbook
