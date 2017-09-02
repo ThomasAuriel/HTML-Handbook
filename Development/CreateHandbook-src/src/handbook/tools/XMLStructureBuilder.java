@@ -101,6 +101,15 @@ public class XMLStructureBuilder {
 	}
 
 	private static void createHeadline(Note note, Node headlineNode) {
+		// Create a link to the file
+		Element fileLink = note.xmlElement.getOwnerDocument().createElement("a");
+		fileLink.setAttribute("class", HTMLElements.balise_class_fileLinkTitle);
+		fileLink.setAttribute("href", note.filePath.getPath());
+		Element fileLogo = note.xmlElement.getOwnerDocument().createElement("img");
+		fileLogo.setAttribute("src", "./css/file.svg");
+		fileLogo.setAttribute("alt", "Open the file : " + note.filePath.getPath());
+		fileLink.appendChild(fileLogo);
+
 		// Create a fade link to allow to get the link of the title.
 		Element fadeLink = note.xmlElement.getOwnerDocument().createElement("a");
 		fadeLink.setAttribute("class", HTMLElements.balise_class_fadeLinkTitle);
@@ -112,6 +121,7 @@ public class XMLStructureBuilder {
 		title.setAttribute("id", note.id);
 		title.appendChild(fadeLink);
 		title.appendChild(note.xmlElement.getOwnerDocument().createTextNode(note.title));
+		title.appendChild(fileLink);
 
 		headlineNode.appendChild(title);
 	}

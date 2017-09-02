@@ -34,6 +34,16 @@ h1 {
   color: #D6D5DA;
   margin-left:-20px;
 }
+.file-link-title
+{
+  margin-left: 700px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(./css/file.svg);
+  background-repeat: no-repeat;
+}
+
 @media print {
   .fade-link-title {
     display: none;

@@ -69,7 +69,7 @@ public class TemplateUtils {
 			xmlElement = XMLUtils.parseXML(template);
 		} catch (ParserConfigurationException e) {
 			HandbookUI.addMessage(
-					"Impossible to parse the template : " + template + "nCheck that the tags are correctly closed.");
+					"Impossible to parse the template : " + template + " \nCheck that the tags are correctly closed.");
 			throw e;
 		} catch (SAXException e) {
 			HandbookUI.addMessage("Impossible to parse the template : " + template);

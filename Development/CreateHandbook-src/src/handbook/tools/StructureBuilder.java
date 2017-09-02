@@ -86,7 +86,7 @@ public class StructureBuilder {
 				setStructure(subFolder, note);
 			}
 
-			System.err.println("Impossible to read the file : " + markdownFile.getPath());
+			//System.err.println("Impossible to read the file : " + markdownFile.getPath());
 
 		}
 

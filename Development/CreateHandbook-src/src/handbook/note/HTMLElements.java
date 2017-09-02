@@ -9,6 +9,7 @@ public class HTMLElements {
 	public static final transient String balise_class_firstPageVersion = "first-page-version";
 	public static final transient String balise_class_firstPageDate = "first-page-date";
 	// Title balises
+	public static final transient String balise_class_fileLinkTitle = "file-link-title";
 	public static final transient String balise_class_fadeLinkTitle = "fade-link-title";
 	// Tag balises
 	public static final transient String balise_class_tag = "tag";
