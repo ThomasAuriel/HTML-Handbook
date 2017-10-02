@@ -86,7 +86,8 @@ public class StructureBuilder {
 				setStructure(subFolder, note);
 			}
 
-			//System.err.println("Impossible to read the file : " + markdownFile.getPath());
+			// System.err.println("Impossible to read the file : " +
+			// markdownFile.getPath());
 
 		}
 
@@ -139,9 +140,11 @@ public class StructureBuilder {
 
 		String activityDate = (String) yamlElements.get(NoteElements.balise_attribute_activity);
 
+		List<String> previous = (List<String>) yamlElements.get(NoteElements.balise_attribute_previous);
+
 		// Create the note
 		return new Note(markdownFile, parent, title, id, template, tags, tocLevel, author, date, version, activityDate,
-				content);
+				previous, content);
 	}
 
 	/**
@@ -169,6 +172,23 @@ public class StructureBuilder {
 		// remove the delimiters
 		metadata = metadata.replaceAll("\\A`{3,}[\\s]*|[\\s]*`{3,}\\z", "");
 		return metadata;
+	}
+
+	// Populate the nextElement list.
+	public static void formatNotes(Note note) {
+
+		if (note.previousElement != null && !note.previousElement.isEmpty())
+			for (String previous : note.previousElement) {
+				Note previousNote = Note.idMap.get(previous);
+
+				if (previousNote != null) {
+					previousNote.nextElement.add(note.id);
+				}
+			}
+
+		for (Note subnote : note.subContent) {
+			formatNotes(subnote);
+		}
 	}
 
 }

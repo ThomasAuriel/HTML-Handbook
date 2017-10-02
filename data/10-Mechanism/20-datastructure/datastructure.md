@@ -12,7 +12,7 @@ The data folder contains all the data to display in the final handbook file.
 Sub-folders can contain multiple [markdown] files. They will be regarded as note in the same level during the generation. This mean that the they will be include in their parent as sub-notes. However, if a folder containing other sub-folder has multiple markdown files, then each markdown file will contain the subnotes. This create a confusing duplication of notes. This structure is to avoid.
 
 Example of a **correct data structure**
-```nohighlight
+```
 data + handbook.md
      |
      + subnote1 + subnote1.md
@@ -23,7 +23,7 @@ data + handbook.md
 ```
 
 Example of a **data structure to avoid**:
-```nohighlight
+```
 data + handbook.md
      |
      + subnote1 + subnote1.md

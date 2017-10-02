@@ -29,6 +29,8 @@ public class Note {
 	public String template;
 	public List<String> tags;
 	public int tocLevel;
+	public List<String> previousElement;
+	public List<String> nextElement;
 
 	public String title;
 	public String activityDate;
@@ -54,7 +56,7 @@ public class Note {
 	 * @param content
 	 */
 	public Note(File filePath, Note parent, String title, String id, String template, List<String> tags, int tocLevel,
-			String author, String date, String version, String activityDate, String content) {
+			String author, String date, String version, String activityDate, List<String> previous, String content) {
 
 		this.filePath = filePath;
 
@@ -66,6 +68,8 @@ public class Note {
 		this.template = template;
 		this.tags = tags;
 		this.tocLevel = tocLevel;
+		this.previousElement = previous;
+		this.nextElement = new ArrayList<String>();
 
 		this.author = author;
 		this.activityDate = activityDate;

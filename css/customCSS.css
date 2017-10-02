@@ -36,7 +36,6 @@ h1 {
 }
 .file-link-title
 {
-  margin-left: 700px;
   display: inline-block;
   width: 30px;
   height: 30px;
@@ -122,6 +121,38 @@ h1 {
 }
 
 .tag {
+    white-space: pre-line;
+    display: inline-block;
+}
+
+/* Previous and next elements */
+.next-list, .previous-list, 
+.next-list-element, .previous-list-element{
+  padding: 0px 0px 0px 0px;
+  text-align: left;
+  text-justify: none;
+  page-break-inside: avoid;
+  list-style-type: none;
+  display: inline-block;
+}
+
+.previous-list::before {
+  content: "Previous Action: ";
+  font-weight: bold;
+}
+.next-list::before {
+  content: "Next Action: ";
+  font-weight: bold;
+}
+
+.next-list-element:after, .previous-list-element:after {
+  content: ", ";
+}
+.next-list-element:last-child:after, .previous-list-element:last-child:after {
+    content: "";
+}
+
+.next, .previous {
     white-space: pre-line;
     display: inline-block;
 }

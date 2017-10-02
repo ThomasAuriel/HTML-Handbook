@@ -33,6 +33,10 @@ public class XMLStructureBuilder {
 					formatReferenceNode(note, (Element) item);
 				} else if (item.getNodeName().equals(NoteElements.balise_Subcontent)) {
 					formatSubContent(note, (Element) item);
+				} else if (item.getNodeName().equals(NoteElements.balise_Previous)) {
+					formatPrevious(note, (Element) item);
+				} else if (item.getNodeName().equals(NoteElements.balise_Next)) {
+					formatNext(note, (Element) item);
 					// } else if
 					// (item.getNodeName().equals(NoteElements.balise_Calendar))
 					// {
@@ -260,6 +264,72 @@ public class XMLStructureBuilder {
 		link.appendChild(ownerDocument.createTextNode(text));
 
 		return link;
+	}
+
+	public static void formatPrevious(Note note, Node previous) {
+
+		List<String> previousIds = note.previousElement;
+
+		if (previousIds != null && !previousIds.isEmpty()) {
+
+			// Add the tag list element
+			Element previousList = note.xmlElement.getOwnerDocument().createElement("ul");
+			previousList.setAttribute("class", HTMLElements.balise_class_previousList);
+
+			for (String previousId : previousIds) {
+				Note previousNote = Note.idMap.get(previousId);
+
+				Element listElement = note.xmlElement.getOwnerDocument().createElement("li");
+				listElement.setAttribute("class", HTMLElements.balise_class_previousListElement);
+				Element previousLink;
+				if (previousNote != null) {
+					previousLink = createLink(previousNote);
+				} else {
+					previousLink = createLink(note.xmlElement.getOwnerDocument(), "#", "NoNote> " + previousId);
+				}
+				previousLink.setAttribute("class", HTMLElements.balise_class_previous);
+				listElement.appendChild(previousLink);
+
+				previousList.appendChild(listElement);
+			}
+
+			if (previousList.hasChildNodes())
+				previous.appendChild(previousList);
+
+		}
+	}
+	
+	public static void formatNext(Note note, Node next) {
+
+		List<String> nextIds = note.nextElement;
+
+		if (nextIds != null && !nextIds.isEmpty()) {
+
+			// Add the tag list element
+			Element nextList = note.xmlElement.getOwnerDocument().createElement("ul");
+			nextList.setAttribute("class", HTMLElements.balise_class_nextList);
+
+			for (String nextId : nextIds) {
+				Note nextNote = Note.idMap.get(nextId);
+
+				Element listElement = note.xmlElement.getOwnerDocument().createElement("li");
+				listElement.setAttribute("class", HTMLElements.balise_class_nextListElement);
+				Element nextLink;
+				if (nextNote != null) {
+					nextLink = createLink(nextNote);
+				} else {
+					nextLink = createLink(note.xmlElement.getOwnerDocument(), "#", "NoNote> " + nextId);
+				}
+				nextLink.setAttribute("class", HTMLElements.balise_class_next);
+				listElement.appendChild(nextLink);
+
+				nextList.appendChild(listElement);
+			}
+
+			if (nextList.hasChildNodes())
+				next.appendChild(nextList);
+
+		}
 	}
 
 }

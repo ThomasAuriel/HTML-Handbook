@@ -19,6 +19,14 @@ public class HTMLElements {
 	public static final transient String balise_class_toc = "toc-list";
 	public static final transient String balise_class_tocTitle = "toc-title";
 	public static final transient String balise_class_tocElement = "toc-element";
+	// Previous balises
+	public static final transient String balise_class_previous = "previous";
+	public static final transient String balise_class_previousList = "previous-list";
+	public static final transient String balise_class_previousListElement = "previous-list-element";
+	// Next balises
+	public static final transient String balise_class_next = "next";
+	public static final transient String balise_class_nextList = "next-list";
+	public static final transient String balise_class_nextListElement = "next-list-element";
 	// Markdown balises
 	public static final transient String balise_class_markdown = "markdown";
 	// Referring notes balises
