@@ -15,8 +15,6 @@ sudo docker run \
                   -r markdown-it-imsize \
                   -r markdown-it-highlightjs \
                   -r markdown-it-math \
-                  -r markdown-it-mermaid \
-                  -r markdown-it-video \
                   -r ascii2mathml \
                   -r babelify \
                   /browserify/main.js -o /browserify/bundle.js

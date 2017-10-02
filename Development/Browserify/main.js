@@ -1,4 +1,3 @@
-
 var $ = require('jquery-browserify')
 
 $(document).ready(function(){

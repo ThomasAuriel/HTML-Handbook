@@ -1,3 +1,5 @@
+// Source: https://github.com/tylingsoft/markdown-it-mermaid
+
 module.exports = {
 
 	renderMarkdown: function(){
@@ -31,10 +33,10 @@ module.exports = {
 		//Images
 		// md.use(require('markdown-it-imsize'), { autofill: false });
 		//Video
-		md.use(require('markdown-it-video'));
+		md.use(require('./markdown-it-video.js'));
 
 		//Graph
-		md.use(require('markdown-it-mermaid'));
+		md.use(require('./markdown-it-mermaid.js'));
 
 
 		const env = {}
