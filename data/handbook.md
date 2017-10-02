@@ -5,7 +5,7 @@ tag:
  - a-second-note
 toc: 2
 date: dd/MM/yyyy
-version: Version 0.4
+version: Version 0.4.1
 author: Thomas Auriel
 template: firstPage_template.html
 ```

@@ -3,6 +3,8 @@ package handbook.utils;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Utils {
 
@@ -26,6 +28,7 @@ public class Utils {
 	}
 
 	public static String formatPath(String content, File file) {
-		return content.replaceAll("\\$NOTEPATH", file.getParent());
+
+		return content.replaceAll("(\\!\\[.*\\]\\()\\.(/.*\\))", "$1"+file.getParent()+"$2");
 	}
 }

@@ -3,8 +3,8 @@ title: Markdown
 id: markdown
 ```
 
-![Markdown logo]($NOTEPATH/markdownLogo.png)
-	
+![Markdown logo](./markdownLogo.png)
+​	
 According to the [official website](#https://daringfireball.net/projects/markdown/) :
 
 	Markdown is a text-to-HTML conversion tool for web writers. Markdown allows you to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML).
