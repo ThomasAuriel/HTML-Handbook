@@ -140,11 +140,17 @@ public class StructureBuilder {
 
 		String activityDate = (String) yamlElements.get(NoteElements.balise_attribute_activity);
 
+		// Dashboard
 		List<String> previous = (List<String>) yamlElements.get(NoteElements.balise_attribute_previous);
-
+		String taskStatus = (String) yamlElements.get(NoteElements.balise_attribute_taskstatus);
+		Integer dashboardMaxLevel = (Integer) yamlElements.get(NoteElements.balise_attribute_dashboardmaxlevel);
+		if (dashboardMaxLevel == null)
+			dashboardMaxLevel = 0;
+		
 		// Create the note
-		return new Note(markdownFile, parent, title, id, template, tags, tocLevel, author, date, version, activityDate,
-				previous, content);
+		Note note = new Note(markdownFile, parent, title, id, template, tags, tocLevel, dashboardMaxLevel, previous,
+				taskStatus, author, date, version, activityDate, content);
+		return note;
 	}
 
 	/**
@@ -172,23 +178,6 @@ public class StructureBuilder {
 		// remove the delimiters
 		metadata = metadata.replaceAll("\\A`{3,}[\\s]*|[\\s]*`{3,}\\z", "");
 		return metadata;
-	}
-
-	// Populate the nextElement list.
-	public static void formatNotes(Note note) {
-
-		if (note.previousElement != null && !note.previousElement.isEmpty())
-			for (String previous : note.previousElement) {
-				Note previousNote = Note.idMap.get(previous);
-
-				if (previousNote != null) {
-					previousNote.nextElement.add(note.id);
-				}
-			}
-
-		for (Note subnote : note.subContent) {
-			formatNotes(subnote);
-		}
 	}
 
 }

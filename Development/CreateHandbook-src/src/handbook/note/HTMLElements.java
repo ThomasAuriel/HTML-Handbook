@@ -27,6 +27,10 @@ public class HTMLElements {
 	public static final transient String balise_class_next = "next";
 	public static final transient String balise_class_nextList = "next-list";
 	public static final transient String balise_class_nextListElement = "next-list-element";
+	// Dashboard - Used for active, waiting, done list
+	public static final transient String balise_class_dashboard = "dashboard";
+	public static final transient String balise_class_dashboardList = "dashboard-list";
+	public static final transient String balise_class_dashboardListElement = "dashboard-list-element";
 	// Markdown balises
 	public static final transient String balise_class_markdown = "markdown";
 	// Referring notes balises

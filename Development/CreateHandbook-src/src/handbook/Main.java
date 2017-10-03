@@ -3,6 +3,7 @@ package handbook;
 import java.io.File;
 
 import handbook.note.Note;
+import handbook.tools.DashboardBuilder;
 import handbook.tools.StructureBuilder;
 import handbook.tools.XMLStructureBuilder;
 import handbook.utils.xml.XMLUtils;
@@ -18,13 +19,14 @@ public class Main {
 
 			// Create the hierarchy tree
 			Note note = StructureBuilder.getStructure(new File("./data"));
-			
-			//Finish to format notes
-			StructureBuilder.formatNotes(note);
-			
-			//Create the xml structure used in the javascript
+
+			// Finish to format notes
+			DashboardBuilder.formatNextElements(note);
+			DashboardBuilder.formatDashboard(note);
+
+			// Create the xml structure used in the javascript
 			XMLStructureBuilder.createXMLStructure(note);
-			
+
 			XMLUtils.writeFile(note, new File("./formatedHandbook.md"));
 
 			HandbookUI.addMessage("Formating completed");

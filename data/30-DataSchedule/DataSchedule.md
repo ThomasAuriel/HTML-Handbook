@@ -1,7 +1,9 @@
 ```
 title: Data Structure
-toc: 2
+dashboard: 2
 ```
+
+Dashboard example
 
 ```mermaid
 graph LR

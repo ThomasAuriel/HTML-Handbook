@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.w3c.dom.Element;
 
@@ -29,12 +31,22 @@ public class Note {
 	public String template;
 	public List<String> tags;
 	public int tocLevel;
-	public List<String> previousElement;
-	public List<String> nextElement;
+
+	// Task
+	public List<String> previousElements;
+	public List<String> nextElements;
+	public String taskStatus;
+
+	// Dashboard
+	public int dashboardMaxLevel = 0;
+	public int dashboardCurrentLevel = 0;
+	public Set<String> activeTasks;
+	public Set<String> waitingTasks;
+	public Set<String> doneTasks;
 
 	public String title;
-	public String activityDate;
 	public boolean activity;
+	public String activityDate;
 	public String author;
 	public String date;
 	public String version;
@@ -56,7 +68,8 @@ public class Note {
 	 * @param content
 	 */
 	public Note(File filePath, Note parent, String title, String id, String template, List<String> tags, int tocLevel,
-			String author, String date, String version, String activityDate, List<String> previous, String content) {
+			int dashboardMaxLevel, List<String> previousElements, String taskStatus, String author, String date,
+			String version, String activityDate, String content) {
 
 		this.filePath = filePath;
 
@@ -68,12 +81,20 @@ public class Note {
 		this.template = template;
 		this.tags = tags;
 		this.tocLevel = tocLevel;
-		this.previousElement = previous;
-		this.nextElement = new ArrayList<String>();
+
+		this.previousElements = previousElements != null ? previousElements : new ArrayList<String>();
+		this.nextElements = new ArrayList<String>();
+		this.taskStatus = taskStatus;
+
+		this.dashboardMaxLevel = dashboardMaxLevel;
+		this.dashboardCurrentLevel = 0;
+		this.activeTasks = new TreeSet<String>();
+		this.waitingTasks = new TreeSet<String>();
+		this.doneTasks = new TreeSet<String>();
 
 		this.author = author;
-		this.activityDate = activityDate;
 		this.activity = activityDate != null && !activityDate.isEmpty();
+		this.activityDate = activityDate;
 		this.date = date;
 		this.version = version;
 		this.content = content;

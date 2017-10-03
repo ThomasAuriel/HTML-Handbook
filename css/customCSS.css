@@ -8,8 +8,9 @@ body {
   text-justify: inter-word;
   text-align: justify;
 }
-li {
-  padding: 10px 0px 0px 0px;
+
+.markdown{
+  padding-left: 10px;
 }
 
 /* Table */
@@ -125,15 +126,30 @@ h1 {
     display: inline-block;
 }
 
+/* Status of the current element */
+.status-active::before,
+.status-waiting::before,
+.status-done::before {
+  content: "Status: ";
+  font-weight: bold;
+}
+.status-active{
+  background-color: #86AF49;
+}
+.status-waiting{
+  background-color: #90A7D0;
+}
+.status-done{
+  background-color: #D6D5DA;
+}
+
 /* Previous and next elements */
 .next-list, .previous-list, 
 .next-list-element, .previous-list-element{
   padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
   text-align: left;
-  text-justify: none;
-  page-break-inside: avoid;
   list-style-type: none;
-  display: inline-block;
 }
 
 .previous-list::before {
@@ -145,16 +161,79 @@ h1 {
   font-weight: bold;
 }
 
+.previous-list-element-active,
+.next-list-element-active{
+  padding: 0px 0px 0px 0px;
+  background-color: #86AF49;
+}
+.previous-list-element-waiting,
+.next-list-element-waiting{
+  padding: 0px 0px 0px 0px;
+  background-color: #90A7D0;
+}
+.previous-list-element-done,
+.next-list-element-done{
+  padding: 0px 0px 0px 0px;
+  background-color: #D6D5DA;
+}
+
 .next-list-element:after, .previous-list-element:after {
   content: ", ";
 }
 .next-list-element:last-child:after, .previous-list-element:last-child:after {
-    content: "";
+  content: "";
 }
 
-.next, .previous {
-    white-space: pre-line;
-    display: inline-block;
+/* Dashboard */
+/*.dashboard-list-active,
+.dashboard-list-waiting,
+.dashboard-list-done{
+  float: left;
+  width: 33%;
+  height: 100%;
+}*/
+.dashboard-list-active,
+.dashboard-list-waiting,
+.dashboard-list-done,
+.dashboard-list-active-element,
+.dashboard-list-waiting-element,
+.dashboard-list-done-element{
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  text-align: left;
+  list-style-type: none;
+}
+
+.dashboard-list-active::before {
+  content: "Active Tasks: ";
+  font-weight: bold;
+}
+.dashboard-list-waiting::before {
+  content: "Waiting Tasks: ";
+  font-weight: bold;
+}
+.dashboard-list-done::before {
+  content: "Done Tasks: ";
+  font-weight: bold;
+}
+
+.dashboard-list-element-active{
+  padding: 0px 0px 0px 0px;
+  background-color: #86AF49;
+}
+.dashboard-list-element-waiting{
+  padding: 0px 0px 0px 0px;
+  background-color: #90A7D0;
+}
+.dashboard-list-element-done{
+  padding: 0px 0px 0px 0px;
+  background-color: #D6D5DA;
+}
+
+.dashboard-list-element-active:last-child:after,
+.dashboard-list-element-waiting:last-child:after,
+.dashboard-list-element-done:last-child:after {
+    content: "";
 }
 
 /* Links rendering */
