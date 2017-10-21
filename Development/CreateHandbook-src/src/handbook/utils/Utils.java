@@ -27,6 +27,6 @@ public class Utils {
 
 	public static String formatPath(String content, File file) {
 
-		return content.replaceAll("(\\!\\[.*\\]\\()\\.(/.*\\))", "$1"+file.getParent()+"$2");
+		return content.replaceAll("(\\[.*\\]\\()\\.(/.*\\))", "$1"+file.getParent()+"$2");
 	}
 }

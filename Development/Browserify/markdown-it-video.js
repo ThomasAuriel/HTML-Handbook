@@ -1,5 +1,6 @@
 // Source:https://github.com/brianjgeiger/markdown-it-video
 
+// Process @[local](localpath)
 // Process @[youtube](youtubeVideoID)
 // Process @[vimeo](vimeoVideoID)
 // Process @[vine](vineVideoID)
@@ -58,7 +59,9 @@ function video_embed(md, options) {
     var videoID = match[2];
     var serviceLower = service.toLowerCase();
 
-    if (serviceLower === 'youtube') {
+    if (serviceLower === 'local') {
+      videoID = videoID;
+    } else if (serviceLower === 'youtube') {
       videoID = youtube_parser(videoID);
     } else if (serviceLower === 'vimeo') {
       videoID = vimeo_parser(videoID);
@@ -105,6 +108,8 @@ function video_embed(md, options) {
 
 function video_url(service, videoID, options) {
   switch (service) {
+    case 'local':
+      return videoID;
     case 'youtube':
       return 'https://www.youtube.com/embed/' + videoID;
     case 'vimeo':
@@ -123,6 +128,13 @@ function tokenize_video(md, options) {
   function tokenize_return(tokens, idx) {
     var videoID = md.utils.escapeHtml(tokens[idx].videoID);
     var service = md.utils.escapeHtml(tokens[idx].service).toLowerCase();
+
+    if(service == 'local'){
+      return '<div class="embed-responsive embed-responsive-16by9">'+
+      '<video controls="" width="'+(options[service].width)+'" height="'+(options[service].height)+'">'+
+      '<source src="' + options.url(service, videoID, options) + '" type="video/mp4">Your browser does not support the video tag.</video></div>';
+    }
+
     return videoID === '' ? '' :
       '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" id="' +
       service + 'player" type="text/html" width="' + (options[service].width) +
@@ -136,6 +148,7 @@ function tokenize_video(md, options) {
 
 var defaults = {
   url: video_url,
+  local: { width: 640, height: 390 },
   youtube: { width: 640, height: 390 },
   vimeo: { width: 500, height: 281 },
   vine: { width: 600, height: 600, embed: 'simple' },
