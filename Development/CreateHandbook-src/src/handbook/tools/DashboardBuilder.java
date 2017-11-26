@@ -4,44 +4,56 @@ import java.util.ArrayList;
 import java.util.List;
 
 import handbook.note.Note;
-import handbook.note.TaskStatus;
+import handbook.utils.template.TaskUtil;
 
 public class DashboardBuilder {
 
+	/**
+	 * Format required note dashboard
+	 */
+	public static void formatDashboards() {
+
+		for (Note note : Note.getAllNotes()) {
+			formatDashboard(note);
+		}
+
+	}
+
 	public static void formatDashboard(Note dashboard) {
 
-		if (dashboard.dashboardMaxLevel > 0) {
+		if (dashboard.dashboardLevel > 0) {
 
 			// Find all the subtasks
 			List<Note> tasks = new ArrayList<Note>();
 			for (Note subNote : dashboard.subContent) {
-				getTask(subNote, tasks, dashboard, dashboard.dashboardMaxLevel);
+				getTask(subNote, tasks, dashboard, dashboard.dashboardLevel);
 			}
-		}
 
-		// Get subdashboard
-		for (Note subnote : dashboard.subContent) {
-			formatDashboard(subnote);
+			// Populate the activate, done and waiting list in the dashboard
+			for (Note task : tasks) {
+				if (TaskUtil.isDone(task)) {
+					dashboard.dashboardDoneTasks.add(task.id);
+				} else if (TaskUtil.isActive(task)) {
+					dashboard.dashboardActiveTasks.add(task.id);
+				} else {
+					dashboard.dashboardWaitingTasks.add(task.id);
+				}
+			}
 		}
 
 	}
 
 	private static void getTask(Note note, List<Note> tasks, Note dashboard, int currentLevel) {
 
-		// Init the note.
-		note.dashboardCurrentLevel = 0;
-
-		// if the current level is low than 0, then stop to scan notes to look for
-		// subtasks.
+		// if the current level is low than 0, then stop
 		if (currentLevel <= 0)
 			return;
 		else
 			currentLevel = currentLevel - 1; // Create a new integer to store the new level and not change the
 												// dashboard.dashboardMaxLevel
 
-		if (!note.nextElements.isEmpty() || !note.previousElements.isEmpty()) {
+		if (!note.taskStatus.isEmpty() || !note.previousElements.isEmpty()) {
 			tasks.add(note);
-			note.dashboardCurrentLevel = currentLevel;
 		}
 
 		// Get subtasks
@@ -49,53 +61,32 @@ public class DashboardBuilder {
 			getTask(subnote, tasks, dashboard, currentLevel);
 		}
 
-		// Populate the activate, done and waiting list in the dashboard
-		for (Note task : tasks) {
-			if (task.taskStatus != null && task.taskStatus.equals(TaskStatus.done)) {
-				dashboard.doneTasks.add(task.id);
-			} else if (isActive(task)) {
-				dashboard.activeTasks.add(task.id);
-				task.taskStatus = TaskStatus.active;
-			} else {
-				dashboard.waitingTasks.add(task.id);
-				task.taskStatus = TaskStatus.waiting;
-			}
-		}
 	}
 
 	/**
-	 * Indicate if a task is active. All previous tasks shall be done.
-	 * 
-	 * @param note
-	 * @return
+	 * Populate the nextElement list of all loaded notes.
 	 */
-	public static boolean isActive(Note note) {
+	public static void formatNextElements() {
 
-		for (String previous : note.previousElements)
-			// if once previous tasks is not done (active or waiting) then the current task
-			// is not active.
-			if (Note.idMap.get(previous).taskStatus == null
-					|| !Note.idMap.get(previous).taskStatus.equals(TaskStatus.done))
-				return false;
+		for (Note note : Note.getAllNotes()) {
+			formatNextElement(note);
+		}
 
-		return true;
 	}
 
-	// Populate the nextElement list.
-	public static void formatNextElements(Note note) {
+	/**
+	 * Populate the nextElement list element of the notes targeted by the
+	 * previousElements of the current note.
+	 * 
+	 * @param note
+	 */
+	private static void formatNextElement(Note note) {
 
 		if (note.previousElements != null && !note.previousElements.isEmpty())
 			for (String previous : note.previousElements) {
-				Note previousNote = Note.idMap.get(previous);
-
-				if (previousNote != null) {
-					previousNote.nextElements.add(note.id);
-				}
+				Note previousNote = Note.getNote(previous);
+				previousNote.nextElements.add(note.id);
 			}
-
-		for (Note subnote : note.subContent) {
-			formatNextElements(subnote);
-		}
 	}
 
 }

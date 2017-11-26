@@ -4,12 +4,15 @@ import java.io.File;
 
 import handbook.note.Note;
 import handbook.tools.DashboardBuilder;
+import handbook.tools.ReferenceBuilder;
 import handbook.tools.StructureBuilder;
 import handbook.tools.XMLStructureBuilder;
 import handbook.utils.xml.XMLUtils;
 import handbook.view.HandbookUI;
 
 public class Main {
+
+	public static boolean autoClose = true;
 
 	public static void main(String[] args) {
 
@@ -21,18 +24,23 @@ public class Main {
 			Note note = StructureBuilder.getStructure(new File("./data"));
 
 			// Finish to format notes
-			DashboardBuilder.formatNextElements(note);
-			DashboardBuilder.formatDashboard(note);
+			// Format dashboard
+			DashboardBuilder.formatNextElements();
+			DashboardBuilder.formatDashboards();
+			// Format reference
+			ReferenceBuilder.formatReferences();
 
 			// Create the xml structure used in the javascript
-			XMLStructureBuilder.createXMLStructure(note);
+			XMLStructureBuilder.createXMLElements(note);
+			XMLStructureBuilder.completeXMLElements();
 
-			XMLUtils.writeFile(note, new File("./formatedHandbook.md"));
+			XMLUtils.writeFile(note, new File("formatedHandbook.md"));
 
-			HandbookUI.addMessage("Formating completed");
-			System.exit(0);
+			HandbookUI.addMessage("Formating completed", false);
+
+			if (autoClose)
+				System.exit(0);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			HandbookUI.addMessage(e.getMessage());
 			e.printStackTrace();
 		}

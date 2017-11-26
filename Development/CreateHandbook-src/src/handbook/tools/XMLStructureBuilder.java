@@ -1,413 +1,414 @@
 package handbook.tools;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
 
-import handbook.note.HTMLElements;
 import handbook.note.Note;
 import handbook.note.NoteElements;
 import handbook.utils.Utils;
+import handbook.utils.template.TaskUtil;
+import handbook.utils.template.TemplateUtils;
+import handbook.view.HandbookUI;
 
 public class XMLStructureBuilder {
 
-	public static void createXMLStructure(Note note) {
-		NodeList childNodes = note.xmlElement.getChildNodes();
+	public static void createXMLElements(Note root) throws Exception {
+		TemplateUtils.createXMLNotes(root);
+	}
 
+	/**
+	 * 
+	 * @param note
+	 */
+	public static void completeXMLElements() {
+		for (Note note : Note.getAllNotes()) {
+			completeXMLElement(note);
+		}
+	}
+
+	private static void completeXMLElement(Note note) {
+
+		// Add the id of the note
+		addID(note, note.xmlElement);
+
+		NodeList childNodes = note.xmlElement.getChildNodes();
 		for (int i = 0; i < childNodes.getLength(); i++) {
 			Node item = childNodes.item(i);
 
 			if (item instanceof Element) {
-				if (item.getNodeName().equals(NoteElements.balise_Head)) {
-					formatHeadlineNode(note, (Element) item);
-				} else if (item.getNodeName().equals(NoteElements.balise_ToC)) {
-					formatTocNode(note, (Element) item);
-				} else if (item.getNodeName().equals(NoteElements.balise_Tags)) {
-					formatTagNode(note, (Element) item);
-				} else if (item.getNodeName().equals(NoteElements.balise_Content)) {
-					formatContentNode(note, (Element) item);
-				} else if (item.getNodeName().equals(NoteElements.balise_References)) {
-					formatReferenceNode(note, (Element) item);
-				} else if (item.getNodeName().equals(NoteElements.balise_Subcontent)) {
-					formatSubContent(note, (Element) item);
-				} else if (item.getNodeName().equals(NoteElements.balise_Previous)) {
-					formatPrevious(note, (Element) item);
-				} else if (item.getNodeName().equals(NoteElements.balise_Next)) {
-					formatNext(note, (Element) item);
-				} else if (item.getNodeName().equals(NoteElements.balise_Dashboard)) {
-					formatDashboard(note, (Element) item);
+				if (item.getNodeName().equals(NoteElements.balise_attribute_titleNote)) {
+					addTitle(note, (Element) item);
+
+				} else if (item.getNodeName().equals(NoteElements.balise_attribute_author)) {
+					addAuthor(note, (Element) item);
+
+				} else if (item.getNodeName().equals(NoteElements.balise_attribute_version)) {
+					addVersion(note, (Element) item);
+
+				} else if (item.getNodeName().equals(NoteElements.balise_attribute_date)) {
+					addDate(note, (Element) item);
+
+				} else if (item.getNodeName().equals(NoteElements.balise_attribute_headline)) {
+					// Contain headline: title, author, version, date
+					addHeadline(note, (Element) item);
+
+				} else if (item.getNodeName().equals(NoteElements.balise_attribute_tags)) {
+					addTags(note, (Element) item);
+				} else if (item.getNodeName().equals(NoteElements.balise_attribute_tasks)) {
+					addTasks(note, (Element) item);
+
+				} else if (item.getNodeName().equals(NoteElements.balise_attribute_toc)) {
+					addToC(note, (Element) item);
+				} else if (item.getNodeName().equals(NoteElements.balise_attribute_dashboard)) {
+					addDashboard(note, (Element) item);
+				} else if (item.getNodeName().equals(NoteElements.balise_attribute_content)) {
+					addContent(note, (Element) item);
+				} else if (item.getNodeName().equals(NoteElements.balise_attribute_references)) {
+					addReference(note, (Element) item);
+
+				} else if (item.getNodeName().equals(NoteElements.balise_attribute_subcontent)) {
+					addSubContent(note, (Element) item);
 					// } else if
 					// (item.getNodeName().equals(NoteElements.balise_Calendar))
 					// {
 					// // CustomCalendar.defineCustomCalendar(note, (Element)
 					// // item);
+
 				}
 			}
 		}
-	}
 
-	private static void formatHeadlineNode(Note note, Node headlineNode) {
-
-		if (note.parent != null) {
-			createHeadline(note, headlineNode);
-		} else {
-			formatHandbookTitle(note, headlineNode);
-		}
 	}
 
 	/**
-	 * Format the headline for a handbook element.
+	 * Add the id of a {@link Note} to an {@link Element}
 	 * 
 	 * @param note
-	 * @param headlineNode
+	 * @param rootNode
 	 */
-	private static void formatHandbookTitle(Note note, Node headlineNode) {
-
-		// Define the first page
-		Element firstpage = note.xmlElement.getOwnerDocument().createElement("div");
-		firstpage.setAttribute("class", HTMLElements.balise_class_firstPage);
-
-		// Define the title
-		Element title = note.xmlElement.getOwnerDocument().createElement("h1");
-		title.appendChild(note.xmlElement.getOwnerDocument().createTextNode(note.title));
-		title.setAttribute("class", HTMLElements.balise_class_firstPageTitle);
-		firstpage.appendChild(title);
-
-		// Define the author
-		String authorString = note.author;
-		if (authorString != null) {
-			Element author = note.xmlElement.getOwnerDocument().createElement("h2");
-			author.appendChild(note.xmlElement.getOwnerDocument().createTextNode(authorString));
-			author.setAttribute("class", HTMLElements.balise_class_firstPageAuthor);
-			firstpage.appendChild(author);
-		}
-
-		// Define the version
-		String versionString = note.version;
-		if (versionString != null) {
-			Element version = note.xmlElement.getOwnerDocument().createElement("h2");
-			version.appendChild(note.xmlElement.getOwnerDocument().createTextNode(versionString));
-			version.setAttribute("class", HTMLElements.balise_class_firstPageVersion);
-			firstpage.appendChild(version);
-		}
-
-		// Define the date
-		String dateString = note.date;
-		if (dateString != null) {
-			Element date = note.xmlElement.getOwnerDocument().createElement("h2");
-			date.appendChild(note.xmlElement.getOwnerDocument().createTextNode(Utils.formatDate(dateString)));
-			date.setAttribute("class", HTMLElements.balise_class_firstPageDate);
-			firstpage.appendChild(date);
-		}
-
-		headlineNode.appendChild(firstpage);
+	private static void addID(Note note, Element rootNode) {
+		rootNode.setAttribute("id", note.id);
 	}
 
-	private static void createHeadline(Note note, Node headlineNode) {
-		// Create a link to the file
-		Element fileLink = note.xmlElement.getOwnerDocument().createElement("a");
-		fileLink.setAttribute("class", HTMLElements.balise_class_fileLinkTitle);
-		fileLink.setAttribute("href", note.filePath.getPath());
-		Element fileLogo = note.xmlElement.getOwnerDocument().createElement("img");
-		fileLogo.setAttribute("src", "./css/file.svg");
-		fileLogo.setAttribute("alt", "Open the file : " + note.filePath.getPath());
-		fileLink.appendChild(fileLogo);
+	/**
+	 * Add the title of a {@link Note} to an {@link Element}
+	 * 
+	 * @param note
+	 * @param titleNode
+	 */
+	private static void addTitle(Note note, Element titleNode) {
+		// Title
+		String formatedTitle = "# " + getLink(note);
+		Text titleText = note.xmlElement.getOwnerDocument().createTextNode(formatedTitle);
 
-		// Create a fade link to allow to get the link of the title.
-		Element fadeLink = note.xmlElement.getOwnerDocument().createElement("a");
-		fadeLink.setAttribute("class", HTMLElements.balise_class_fadeLinkTitle);
-		fadeLink.setAttribute("href", "#" + note.id);
-		fadeLink.appendChild(note.xmlElement.getOwnerDocument().createTextNode("#"));
+		Element title = note.xmlElement.getOwnerDocument().createElement("div");
+		title.setAttribute("class", NoteElements.balise_attribute_title + " markdown");
+		title.appendChild(titleText);
+		titleNode.appendChild(title);
 
-		// Create the title
-		Element title = note.xmlElement.getOwnerDocument().createElement("h1");
-		title.setAttribute("id", note.id);
-		title.appendChild(fadeLink);
-		title.appendChild(note.xmlElement.getOwnerDocument().createTextNode(note.title));
-		title.appendChild(fileLink);
+		// Link
+		String formatedFilepath = " [file](" + note.markdownFile.getPath().replace(" ", "%20") + ") ";
+		Text linkText = note.xmlElement.getOwnerDocument().createTextNode(formatedFilepath);
 
-		headlineNode.appendChild(title);
+		Element link = note.xmlElement.getOwnerDocument().createElement("div");
+		link.setAttribute("class", NoteElements.balise_attribute_filepath + " markdown");
+		link.appendChild(linkText);
+		titleNode.appendChild(link);
 
-		// Create the tas status
-		if (note.taskStatus != null && !note.taskStatus.isEmpty()) {
-			Element status = note.xmlElement.getOwnerDocument().createElement("div");
-			status.setAttribute("class", "status-" + note.taskStatus);
-			status.appendChild(note.xmlElement.getOwnerDocument().createTextNode(note.taskStatus));
-			headlineNode.appendChild(status);
-		}
 	}
 
-	private static void formatTocNode(Note note, Element toc) {
+	/**
+	 * Add the author of a {@link Note} to an {@link Element}
+	 * 
+	 * @param note
+	 * @param titleNode
+	 */
+	private static void addAuthor(Note note, Element authorNode) {
+		String formatedAuthor = "## " + note.author;
+		Text authorText = note.xmlElement.getOwnerDocument().createTextNode(formatedAuthor);
+		authorNode.setAttribute("class", NoteElements.balise_attribute_author + " markdown");
+		authorNode.appendChild(authorText);
+	}
 
+	/**
+	 * Add the version of a {@link Note} to an {@link Element}
+	 * 
+	 * @param note
+	 * @param titleNode
+	 */
+	private static void addVersion(Note note, Element versionNode) {
+		String formatedVersion = "## " + note.version;
+		Text versionText = note.xmlElement.getOwnerDocument().createTextNode(formatedVersion);
+		versionNode.setAttribute("class", NoteElements.balise_attribute_version + " markdown");
+		versionNode.appendChild(versionText);
+	}
+
+	/**
+	 * Add the date of a {@link Note} to an {@link Element}
+	 * 
+	 * @param note
+	 * @param date
+	 */
+	private static void addDate(Note note, Element date) {
+		String formatedDate = "## " + Utils.formatDate(note.date);
+		Text dateText = note.xmlElement.getOwnerDocument().createTextNode(formatedDate);
+		date.setAttribute("class", NoteElements.balise_attribute_date + " markdown");
+		date.appendChild(dateText);
+	}
+
+	/**
+	 * Add the headline of a {@link Note} to an {@link Element}
+	 * 
+	 * @param note
+	 * @param titleNode
+	 */
+	private static void addHeadline(Note note, Element headlineNode) {
+
+		// Add title
+		if (note.title != null || !note.title.isEmpty()) {
+			Element title = note.xmlElement.getOwnerDocument().createElement("div");
+			headlineNode.appendChild(title);
+
+			addTitle(note, title);
+		}
+
+		// Add author
+		if (note.author != null || !note.author.isEmpty()) {
+			Element author = note.xmlElement.getOwnerDocument().createElement("div");
+			headlineNode.appendChild(author);
+
+			addAuthor(note, author);
+		}
+
+		// Add version
+		if (note.version != null || !note.version.isEmpty()) {
+			Element version = note.xmlElement.getOwnerDocument().createElement("div");
+			headlineNode.appendChild(version);
+
+			addVersion(note, version);
+		}
+
+		// Add date
+		if (note.date != null || !note.date.isEmpty()) {
+			Element date = note.xmlElement.getOwnerDocument().createElement("div");
+			headlineNode.appendChild(date);
+
+			addDate(note, date);
+		}
+
+	}
+
+	/**
+	 * Add the tags of a {@link Note} to an {@link Element}
+	 * 
+	 * @param note
+	 * @param tocNode
+	 */
+	private static void addTags(Note note, Element tagNode) {
+
+		if (note.tags.isEmpty())
+			return;
+
+		createListLink(note, note.tags, tagNode, NoteElements.balise_attribute_tags + " markdown");
+	}
+
+	/**
+	 * Add the previous task of a {@link Note} to an {@link Element}
+	 * 
+	 * @param note
+	 * @param tocNode
+	 */
+	private static void addTasks(Note note, Element taskNote) {
+
+		if (note.previousElements.isEmpty())
+			return;
+		
+		//ul
+		Element taskUL = note.xmlElement.getOwnerDocument().createElement("ul");
+		taskNote.appendChild(taskUL);
+		
+		
+
+		for (String targetedNote : note.previousElements) {
+			Note targetedTaskNote = Note.getNote(targetedNote);
+			Text taskLinkText;
+			try {
+				taskLinkText = taskNote.getOwnerDocument().createTextNode(targetedTaskNote.title);
+			} catch (Exception ex) {
+				HandbookUI.addMessage("The note [" + targetedTaskNote + "] is not defined. This note is refered by ["
+						+ note.title + "].");
+				taskLinkText = taskNote.getOwnerDocument().createTextNode("No note [" + targetedNote + "]");
+			}
+			//a
+			Element taskA = note.xmlElement.getOwnerDocument().createElement("a");
+			taskA.setAttribute("class", TaskUtil.getTaskStatus(targetedTaskNote));
+			taskA.appendChild(taskLinkText);
+			//li
+			Element taskLI = note.xmlElement.getOwnerDocument().createElement("li");
+			taskLI.appendChild(taskA);
+			taskUL.appendChild(taskLI);
+
+		}
+
+	}
+
+	/**
+	 * Add the toc of a {@link Note} to an {@link Element}
+	 * 
+	 * @param note
+	 * @param tocNode
+	 */
+	private static void addToC(Note note, Element tocNode) {
+
+		// Does not add toc if the current note does not require one.
 		if (note.tocLevel <= 0)
 			return;
 
-		int indentationLevel = 0;
+		String toc = fillToc(note, "\n", 0, note.tocLevel);
 
-		Element tocTitle = note.xmlElement.getOwnerDocument().createElement("h2");
-		tocTitle.appendChild(note.xmlElement.getOwnerDocument().createTextNode("Table of Content"));
-		toc.appendChild(tocTitle);
-
-		fillToc(note, toc, indentationLevel, note.tocLevel);
+		Text tocText = note.xmlElement.getOwnerDocument().createTextNode(toc);
+		tocNode.setAttribute("class", NoteElements.balise_attribute_toc + " markdown");
+		tocNode.appendChild(tocText);
 	}
 
-	private static void fillToc(Note note, Element toc, int indentationLevel, int indentationMax) {
-		if (indentationLevel >= indentationMax || note.subContent.isEmpty())
-			return;
+	/**
+	 * Fill the toc string provided with the toc structure based on the note
+	 * provided.
+	 * 
+	 * @param note
+	 * @param toc
+	 * @param indentationLevel
+	 * @param indentationMax
+	 * @return
+	 */
+	private static String fillToc(Note note, String toc, int indentationLevel, int indentationMax) {
 
-		Element tocList = note.xmlElement.getOwnerDocument().createElement("ul");
-		tocList.setAttribute("class", HTMLElements.balise_class_toc);
-		toc.appendChild(tocList);
+		// If the current level is lower than the maxIndentation, then create the
+		// associated toc
+		if (indentationLevel < indentationMax)
 
-		for (Note subNote : note.subContent) {
-			Element link = subNote.xmlElement.getOwnerDocument().createElement("a");
-			link.setAttribute("href", "#" + subNote.id);
-			link.appendChild(subNote.xmlElement.getOwnerDocument().createTextNode(subNote.title));
-			Element tocEntry = subNote.xmlElement.getOwnerDocument().createElement("li");
-			tocEntry.setAttribute("class", HTMLElements.balise_class_tocElement);
-			tocEntry.appendChild(link);
-			tocList.appendChild(tocEntry);
+			for (Note subNote : note.subContent) {
 
-			fillToc(subNote, tocEntry, indentationLevel + 1, indentationMax);
-		}
-	}
-
-	public static void formatTagNode(Note note, Node tag) {
-
-		String baliseClass = HTMLElements.balise_class_tag;
-		String baliseClassList = HTMLElements.balise_class_tagList;
-		String baliseClassListelement = HTMLElements.balise_class_tagListElement;
-		formatList(note, tag, note.tags, baliseClass, baliseClassList, baliseClassListelement);
-
-	}
-
-	private static void formatContentNode(Note note, Element content) {
-		content.setAttribute("class", HTMLElements.balise_class_markdown);
-		content.appendChild(note.xmlElement.getOwnerDocument().createTextNode(note.content));
-	}
-
-	private static void formatReferenceNode(Note note, Element refering) {
-
-		// Create the list of note refering to this note.
-		Element referingNotesTitle = note.xmlElement.getOwnerDocument().createElement("h2");
-		referingNotesTitle.setAttribute("class", HTMLElements.balise_class_referingNotesTitle);
-		referingNotesTitle.appendChild(note.xmlElement.getOwnerDocument().createTextNode("Content in the document"));
-		Element referingNotesList = note.xmlElement.getOwnerDocument().createElement("ul");
-		referingNotesList.setAttribute("class", HTMLElements.balise_class_referingNotesList);
-
-		// Create the list of activity refering to this note.
-		Element referingActivityTitle = note.xmlElement.getOwnerDocument().createElement("h2");
-		referingActivityTitle.setAttribute("class", HTMLElements.balise_class_referingActivityTitle);
-		referingActivityTitle
-				.appendChild(note.xmlElement.getOwnerDocument().createTextNode("Activity in the document"));
-		Element referingActivityList = note.xmlElement.getOwnerDocument().createElement("ul");
-		referingActivityList.setAttribute("class", HTMLElements.balise_class_referingActivityList);
-
-		List<Note> referringNotes = Note.referingElementMap.get(note.id);
-		if (referringNotes != null && !referringNotes.isEmpty())
-			for (Note referringNote : referringNotes) {
-
-				Element listElement = note.xmlElement.getOwnerDocument().createElement("li");
-				listElement.setAttribute("class", HTMLElements.balise_class_referingNotesListElement);
-				listElement.appendChild(createLink(referringNote));
-
-				if (referringNote.activity) {
-					referingActivityList.appendChild(listElement);
-				} else {
-					referingNotesList.appendChild(listElement);
+				String indentation = new String();
+				for (int i = 0; i < indentationLevel; i++) {
+					indentation += "  ";
 				}
+
+				String tocEntry = indentation + "- [" + subNote.title + "](#" + subNote.id + ")" + "\n";
+				toc += tocEntry;
+
+				toc = fillToc(subNote, toc, indentationLevel + 1, indentationMax);
 			}
 
-		// Insert the list only if it will not be empty
-		if (referingNotesList.hasChildNodes()) {
-			refering.appendChild(referingNotesTitle);
-			refering.appendChild(referingNotesList);
-		}
-		if (referingActivityList.hasChildNodes()) {
-			refering.appendChild(referingActivityTitle);
-			refering.appendChild(referingActivityList);
-		}
+		return toc;
 
 	}
 
-	private static void formatSubContent(Note note, Element item) {
+	/**
+	 * 
+	 * @param note
+	 * @param subcontentNode
+	 */
+	private static void addDashboard(Note note, Element dashboardElement) {
+
+		if (note.dashboardLevel <= 0)
+			return;
+
+		// Active
+		Element active = note.xmlElement.getOwnerDocument().createElement("div");
+		createListLink(note, note.dashboardActiveTasks, active,
+				NoteElements.balise_attribute_dashboard_active + " markdown");
+		dashboardElement.appendChild(active);
+		// Done
+		Element done = note.xmlElement.getOwnerDocument().createElement("div");
+		createListLink(note, note.dashboardDoneTasks, done, NoteElements.balise_attribute_dashboard_done + " markdown");
+		dashboardElement.appendChild(done);
+		// Waiting
+		Element waiting = note.xmlElement.getOwnerDocument().createElement("div");
+		createListLink(note, note.dashboardWaitingTasks, waiting,
+				NoteElements.balise_attribute_dashboard_waiting + " markdown");
+		dashboardElement.appendChild(waiting);
+
+	}
+
+	/**
+	 * 
+	 * @param note
+	 * @param contentNode
+	 */
+	private static void addContent(Note note, Element contentNode) {
+		Text content = contentNode.getOwnerDocument().createTextNode(note.content);
+		contentNode.appendChild(content);
+		contentNode.setAttribute("class", NoteElements.balise_attribute_content + " markdown");
+	}
+
+	private static void addReference(Note note, Element refering) {
+
+		// Add references
+		Element reference = note.xmlElement.getOwnerDocument().createElement("div");
+		createListLink(note, note.references, reference, NoteElements.balise_attribute_references + " markdown");
+		refering.appendChild(reference);
+
+		// Add activity
+		Element activity = note.xmlElement.getOwnerDocument().createElement("div");
+		createListLink(note, note.activity, activity, NoteElements.balise_attribute_activities + " markdown");
+		refering.appendChild(activity);
+
+		// Add tasks
+		Element task = note.xmlElement.getOwnerDocument().createElement("div");
+		createListLink(note, note.tasks, task, NoteElements.balise_attribute_tasks + " markdown");
+		refering.appendChild(task);
+
+	}
+
+	/**
+	 * 
+	 * @param note
+	 * @param subcontentNode
+	 */
+	private static void addSubContent(Note note, Element subcontentNode) {
 		for (Note subnote : note.subContent) {
-			createXMLStructure(subnote);
-			item.appendChild(subnote.xmlElement);
+			subcontentNode.appendChild(subnote.xmlElement);
+			subcontentNode.setAttribute("class", NoteElements.balise_attribute_subcontent);
 		}
 	}
 
-	public static void formatPrevious(Note note, Node previous) {
+	private static String getLink(String id) {
 
-		String baliseClass = HTMLElements.balise_class_previous;
-		String baliseClassList = HTMLElements.balise_class_previousList;
-		String baliseClassListelement = HTMLElements.balise_class_previousListElement;
-		// formatList(note, previous, note.previousElements, baliseClass,
-		// baliseClassList, baliseClassListelement);
-		// Need a custom previous list:
-		if (note.previousElements == null || note.previousElements.isEmpty())
-			return;
+		Note targetNode = Note.getNote(id);
+		if (targetNode == null)
+			return "No Note for [" + id + "]";
+		else
+			return getLink(targetNode);
+	}
 
-		// Add the list element
-		Element elementList = note.xmlElement.getOwnerDocument().createElement("ul");
-		elementList.setAttribute("class", baliseClassList);
+	private static String getLink(Note targetNode) {
+		return "[" + targetNode.title + "](#" + targetNode.id + ")";
+	}
 
-		for (String previousId : note.previousElements) {
-			Note previousTask = Note.idMap.get(previousId);
+	private static void createListLink(Note note, List<String> noteList, Element containingElement, String className) {
 
-			Element listElement = note.xmlElement.getOwnerDocument().createElement("li");
-			listElement.setAttribute("class", baliseClassListelement + "-" + previousTask.taskStatus);
-			Element nextLink;
-			if (previousTask != null) {
-				nextLink = createLink(previousTask);
-			} else {
-				nextLink = createLink(note.xmlElement.getOwnerDocument(), "#", "NoNote> " + previousId);
+		String finalLinkList = "\n";
+		for (String targetedNote : noteList) {
+			String linkFormated = "";
+			try {
+				linkFormated = "- " + getLink(targetedNote);
+			} catch (Exception ex) {
+				HandbookUI.addMessage("The note [" + targetedNote + "] is not defined. This note is refered by ["
+						+ note.title + "].");
+				linkFormated = "- No note [" + targetedNote + "]";
 			}
-			nextLink.setAttribute("class", baliseClass);
-
-			listElement.appendChild(nextLink);
-			elementList.appendChild(listElement);
+			finalLinkList += linkFormated + "\n";
 		}
 
-		if (elementList.hasChildNodes())
-			previous.appendChild(elementList);
+		Text noteListText = containingElement.getOwnerDocument().createTextNode(finalLinkList);
+		containingElement.setAttribute("class", className);
+		containingElement.appendChild(noteListText);
 
-	}
-
-	public static void formatNext(Note note, Node next) {
-
-		String baliseClass = HTMLElements.balise_class_next;
-		String baliseClassList = HTMLElements.balise_class_nextList;
-		String baliseClassListelement = HTMLElements.balise_class_nextListElement;
-		// formatList(note, next, note.nextElements, baliseClass, baliseClassList,
-		// baliseClassListelement);
-		// Need a custom previous list:
-		if (note.nextElements == null || note.nextElements.isEmpty())
-			return;
-
-		// Add the list element
-		Element elementList = note.xmlElement.getOwnerDocument().createElement("ul");
-		elementList.setAttribute("class", baliseClassList);
-
-		for (String nextId : note.nextElements) {
-			Note nextTask = Note.idMap.get(nextId);
-
-			Element listElement = note.xmlElement.getOwnerDocument().createElement("li");
-			listElement.setAttribute("class", baliseClassListelement + "-" + nextTask.taskStatus);
-			Element nextLink;
-			if (nextTask != null) {
-				nextLink = createLink(nextTask);
-			} else {
-				nextLink = createLink(note.xmlElement.getOwnerDocument(), "#", "NoNote> " + nextId);
-			}
-			nextLink.setAttribute("class", baliseClass);
-
-			listElement.appendChild(nextLink);
-			elementList.appendChild(listElement);
-		}
-
-		if (elementList.hasChildNodes())
-			next.appendChild(elementList);
-	}
-
-	private static void formatDashboard(Note note, Node item) {
-
-		Set<String> activeTaskIds = note.activeTasks;
-		Set<String> waitingTaskIds = note.waitingTasks;
-		Set<String> doneTaskIds = note.doneTasks;
-
-		String baliseClass = HTMLElements.balise_class_dashboard;
-		String baliseClassList = HTMLElements.balise_class_dashboardList;
-		String baliseClassListelement = HTMLElements.balise_class_dashboardListElement;
-		List<String> activeList = new ArrayList<String>();
-		activeList.addAll(activeTaskIds);
-		List<String> waitingList = new ArrayList<String>();
-		waitingList.addAll(waitingTaskIds);
-		List<String> doneList = new ArrayList<String>();
-		doneList.addAll(doneTaskIds);
-
-		formatList(note, item, activeList, baliseClass + "-active", baliseClassList + "-active",
-				baliseClassListelement + "-active");
-		formatList(note, item, waitingList, baliseClass + "-waiting", baliseClassList + "-waiting",
-				baliseClassListelement + "-waiting");
-		formatList(note, item, doneList, baliseClass + "-done", baliseClassList + "-done",
-				baliseClassListelement + "-done");
-
-	}
-
-	/**
-	 * Create Link
-	 * 
-	 * @param note
-	 * @return
-	 */
-	private static Element createLink(Note note) {
-		return createLink(note.xmlElement.getOwnerDocument(), "#" + note.id, note.title);
-	}
-
-	/**
-	 * Create link
-	 * 
-	 * @param ownerDocument
-	 * @param url
-	 * @param text
-	 * @return
-	 */
-	private static Element createLink(Document ownerDocument, String url, String text) {
-		Element link = ownerDocument.createElement("a");
-		link.setAttribute("href", url);
-		link.appendChild(ownerDocument.createTextNode(text));
-
-		return link;
-	}
-
-	/**
-	 * Format a list
-	 * 
-	 * @param note
-	 *            root note
-	 * @param includingElement
-	 *            xmlElement which will contain the lsit
-	 * @param includedIds
-	 *            note's ids to include
-	 * @param baliseClass
-	 * @param baliseClassList
-	 * @param baliseClassListelement
-	 */
-	private static void formatList(Note note, Node includingElement, List<String> includedIds, String baliseClass,
-			String baliseClassList, String baliseClassListelement) {
-
-		if (includedIds == null || includedIds.isEmpty())
-			return;
-
-		// Add the list element
-		Element elementList = note.xmlElement.getOwnerDocument().createElement("ul");
-		elementList.setAttribute("class", baliseClassList);
-
-		for (String includeId : includedIds) {
-			Note nextNote = Note.idMap.get(includeId);
-
-			Element listElement = note.xmlElement.getOwnerDocument().createElement("li");
-			listElement.setAttribute("class", baliseClassListelement);
-			Element nextLink;
-			if (nextNote != null) {
-				nextLink = createLink(nextNote);
-			} else {
-				nextLink = createLink(note.xmlElement.getOwnerDocument(), "#", "NoNote> " + includeId);
-			}
-			nextLink.setAttribute("class", baliseClass);
-
-			listElement.appendChild(nextLink);
-			elementList.appendChild(listElement);
-		}
-
-		if (elementList.hasChildNodes())
-			includingElement.appendChild(elementList);
 	}
 
 }

@@ -1,7 +1,7 @@
 ```
 title: Equations
 tag:
- - markdown
+ - Markdown
 ```
 
 It is possible to write equations using this tools. To do this, you need to use the LaTeX syntax or the [ASCIIMath syntax].
@@ -29,6 +29,9 @@ Second-order polynome solutions are :
 _$$x_{1,2} = (-b +- sqrt{b^2 + 4 * a * c})/(2*a)$$_
 
 ### LaTeX
+
+**Important: To use the LaTeX syntax, you must unzip the file `MathJax-minimal.tar.gz` in the `js` file.**
+
 [Markdown-it-katex] and [Katex]: To overcomes limitation in mathematical equation writing, Katex is embedded. These libraries allow to write equations using the complet LaTeX syntax.
 + `$` and `$` define an inline text equation.
 + `$$` and `$$` define a block equation.
@@ -49,7 +52,7 @@ $$
 Second-order polynome solutions are :
 $$x_{1.2} = \frac{-b \pm \sqrt{b^2 + 4 \cdot a \cdot c}}{2 \cdot a}$$
 
-**Source:**
+## Source
 + [Markdown-it]
 + [Markdown-it-math]
 + [markdown-it-katex]

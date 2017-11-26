@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
+import handbook.Main;
+
 public class HandbookUI extends JFrame {
 
 	/**
@@ -16,10 +18,17 @@ public class HandbookUI extends JFrame {
 	private JPanel contentPane;
 	public static JTextPane txtpnHandbookFormaterLok;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void addMessage(String text) {
+		String previousMessages = txtpnHandbookFormaterLok.getText();
+		previousMessages += "\n";
+		previousMessages += "\n";
+		previousMessages += text;
+
+		txtpnHandbookFormaterLok.setText(previousMessages);
+		Main.autoClose = false; // Prevent the app to close and let the message displayed for the user
+	}
+
+	public static void addMessage(String text, boolean donotmodifyautoclose) {
 		String previousMessages = txtpnHandbookFormaterLok.getText();
 		previousMessages += "\n";
 		previousMessages += "\n";

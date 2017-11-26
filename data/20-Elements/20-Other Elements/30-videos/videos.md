@@ -1,5 +1,7 @@
 ```
 title: Video
+tags:
+ - Markdown
 ```
 
 Videos can be embbed using the _non-official syntaxe_
@@ -24,5 +26,5 @@ Videos can be embbed using the _non-official syntaxe_
 ## Prezi
 @[prezi](1kkxdtlp4241)
 
-# Source
+## Source
 + [markdown-it-video](https://github.com/brianjgeiger/markdown-it-video)

@@ -2,7 +2,6 @@ package handbook.utils.xml;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.StringReader;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,7 +14,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import handbook.note.Note;
@@ -32,14 +30,12 @@ public class XMLUtils {
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	public static Document parseXML(String content) throws ParserConfigurationException, SAXException, IOException {
+	public static Document parseXML(String url) throws SAXException, IOException, ParserConfigurationException {
 
-		// Parse the balise in XML.
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
-		Document document = builder.parse(new InputSource(new StringReader(content)));
-
-		return document;
+		Document doc = builder.parse(url);
+		return doc;
 	}
 
 	/**
@@ -47,7 +43,7 @@ public class XMLUtils {
 	 * 
 	 * @param note
 	 * @param output
-	 * @throws TransformerException 
+	 * @throws TransformerException
 	 */
 	public static void writeFile(Note note, File output) throws TransformerException {
 		try {
@@ -59,8 +55,8 @@ public class XMLUtils {
 
 			// Add new line after each balises. Easier to read.
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-			transformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "0");
+			transformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "0");
 			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-16");
 
 			DOMSource source = new DOMSource(note.xmlElement);
