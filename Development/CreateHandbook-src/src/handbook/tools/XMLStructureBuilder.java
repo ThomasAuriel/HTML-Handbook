@@ -1,6 +1,6 @@
 package handbook.tools;
 
-import java.util.List;
+import java.util.Set;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -58,7 +58,7 @@ public class XMLStructureBuilder {
 
 				} else if (item.getNodeName().equals(NoteElements.balise_attribute_tags)) {
 					addTags(note, (Element) item);
-				} else if (item.getNodeName().equals(NoteElements.balise_attribute_tasks)) {
+				} else if (item.getNodeName().equals(NoteElements.balise_attribute_reference_tasks)) {
 					addTasks(note, (Element) item);
 
 				} else if (item.getNodeName().equals(NoteElements.balise_attribute_toc)) {
@@ -67,7 +67,7 @@ public class XMLStructureBuilder {
 					addDashboard(note, (Element) item);
 				} else if (item.getNodeName().equals(NoteElements.balise_attribute_content)) {
 					addContent(note, (Element) item);
-				} else if (item.getNodeName().equals(NoteElements.balise_attribute_references)) {
+				} else if (item.getNodeName().equals(NoteElements.balise_attribute_reference_notes)) {
 					addReference(note, (Element) item);
 
 				} else if (item.getNodeName().equals(NoteElements.balise_attribute_subcontent)) {
@@ -111,7 +111,7 @@ public class XMLStructureBuilder {
 		titleNode.appendChild(title);
 
 		// Link
-		String formatedFilepath = " [file](" + note.markdownFile.getPath().replace(" ", "%20") + ") ";
+		String formatedFilepath = " [![](./css/file.svg)](" + note.markdownFile.getPath().replace(" ", "%20") + ") ";
 		Text linkText = note.xmlElement.getOwnerDocument().createTextNode(formatedFilepath);
 
 		Element link = note.xmlElement.getOwnerDocument().createElement("div");
@@ -224,34 +224,75 @@ public class XMLStructureBuilder {
 	 */
 	private static void addTasks(Note note, Element taskNote) {
 
-		if (note.previousElements.isEmpty())
-			return;
-		
-		//ul
-		Element taskUL = note.xmlElement.getOwnerDocument().createElement("ul");
-		taskNote.appendChild(taskUL);
-		
-		
+		// Task status
+		if (TaskUtil.isTask(note)) {
+			Text textNode = note.xmlElement.getOwnerDocument().createTextNode(TaskUtil.getTaskStatus(note));
+			Element taskStatus = note.xmlElement.getOwnerDocument().createElement("div");
+			taskStatus.setAttribute("class", "status " + TaskUtil.getTaskStatus(note));
+			taskStatus.appendChild(textNode);
+			taskNote.appendChild(taskStatus);
+		}
 
-		for (String targetedNote : note.previousElements) {
-			Note targetedTaskNote = Note.getNote(targetedNote);
-			Text taskLinkText;
-			try {
-				taskLinkText = taskNote.getOwnerDocument().createTextNode(targetedTaskNote.title);
-			} catch (Exception ex) {
-				HandbookUI.addMessage("The note [" + targetedTaskNote + "] is not defined. This note is refered by ["
-						+ note.title + "].");
-				taskLinkText = taskNote.getOwnerDocument().createTextNode("No note [" + targetedNote + "]");
+		// previous tasks
+		if (!note.previousElements.isEmpty()) {
+
+			// ul
+			Element taskUL = note.xmlElement.getOwnerDocument().createElement("ul");
+			taskUL.setAttribute("class", "previous");
+			taskNote.appendChild(taskUL);
+
+			for (String targetedNote : note.previousElements) {
+				Note targetedTaskNote = Note.getNote(targetedNote);
+				Text taskLinkText;
+				try {
+					taskLinkText = taskNote.getOwnerDocument().createTextNode(targetedTaskNote.title);
+				} catch (Exception ex) {
+					HandbookUI.addMessage("The note [" + targetedTaskNote
+							+ "] is not defined. This note is refered by [" + note.title + "].");
+					taskLinkText = taskNote.getOwnerDocument().createTextNode("No note [" + targetedNote + "]");
+				}
+				// a
+				Element taskA = note.xmlElement.getOwnerDocument().createElement("a");
+				taskA.setAttribute("class", TaskUtil.getTaskStatus(targetedTaskNote));
+				taskA.setAttribute("href", "#" + targetedTaskNote.id);
+				taskA.appendChild(taskLinkText);
+				// li
+				Element taskLI = note.xmlElement.getOwnerDocument().createElement("li");
+				taskLI.appendChild(taskA);
+				taskUL.appendChild(taskLI);
+
 			}
-			//a
-			Element taskA = note.xmlElement.getOwnerDocument().createElement("a");
-			taskA.setAttribute("class", TaskUtil.getTaskStatus(targetedTaskNote));
-			taskA.appendChild(taskLinkText);
-			//li
-			Element taskLI = note.xmlElement.getOwnerDocument().createElement("li");
-			taskLI.appendChild(taskA);
-			taskUL.appendChild(taskLI);
+		}
 
+		// Next tasks
+		if (!note.nextElements.isEmpty()) {
+
+			// ul
+			Element taskUL = note.xmlElement.getOwnerDocument().createElement("ul");
+			taskUL.setAttribute("class", "next");
+			taskNote.appendChild(taskUL);
+
+			for (String targetedNote : note.nextElements) {
+				Note targetedTaskNote = Note.getNote(targetedNote);
+				Text taskLinkText;
+				try {
+					taskLinkText = taskNote.getOwnerDocument().createTextNode(targetedTaskNote.title);
+				} catch (Exception ex) {
+					HandbookUI.addMessage("The note [" + targetedTaskNote
+							+ "] is not defined. This note is refered by [" + note.title + "].");
+					taskLinkText = taskNote.getOwnerDocument().createTextNode("No note [" + targetedNote + "]");
+				}
+				// a
+				Element taskA = note.xmlElement.getOwnerDocument().createElement("a");
+				taskA.setAttribute("class", TaskUtil.getTaskStatus(targetedTaskNote));
+				taskA.setAttribute("href", "#" + targetedTaskNote.id);
+				taskA.appendChild(taskLinkText);
+				// li
+				Element taskLI = note.xmlElement.getOwnerDocument().createElement("li");
+				taskLI.appendChild(taskA);
+				taskUL.appendChild(taskLI);
+
+			}
 		}
 
 	}
@@ -323,15 +364,15 @@ public class XMLStructureBuilder {
 		createListLink(note, note.dashboardActiveTasks, active,
 				NoteElements.balise_attribute_dashboard_active + " markdown");
 		dashboardElement.appendChild(active);
-		// Done
-		Element done = note.xmlElement.getOwnerDocument().createElement("div");
-		createListLink(note, note.dashboardDoneTasks, done, NoteElements.balise_attribute_dashboard_done + " markdown");
-		dashboardElement.appendChild(done);
 		// Waiting
 		Element waiting = note.xmlElement.getOwnerDocument().createElement("div");
 		createListLink(note, note.dashboardWaitingTasks, waiting,
 				NoteElements.balise_attribute_dashboard_waiting + " markdown");
 		dashboardElement.appendChild(waiting);
+		// Done
+		Element done = note.xmlElement.getOwnerDocument().createElement("div");
+		createListLink(note, note.dashboardDoneTasks, done, NoteElements.balise_attribute_dashboard_done + " markdown");
+		dashboardElement.appendChild(done);
 
 	}
 
@@ -350,17 +391,17 @@ public class XMLStructureBuilder {
 
 		// Add references
 		Element reference = note.xmlElement.getOwnerDocument().createElement("div");
-		createListLink(note, note.references, reference, NoteElements.balise_attribute_references + " markdown");
+		createListLink(note, note.references, reference, NoteElements.balise_attribute_reference_notes + " markdown");
 		refering.appendChild(reference);
 
 		// Add activity
 		Element activity = note.xmlElement.getOwnerDocument().createElement("div");
-		createListLink(note, note.activity, activity, NoteElements.balise_attribute_activities + " markdown");
+		createListLink(note, note.activity, activity, NoteElements.balise_attribute_reference_activities + " markdown");
 		refering.appendChild(activity);
 
 		// Add tasks
 		Element task = note.xmlElement.getOwnerDocument().createElement("div");
-		createListLink(note, note.tasks, task, NoteElements.balise_attribute_tasks + " markdown");
+		createListLink(note, note.tasks, task, NoteElements.balise_attribute_reference_tasks + " markdown");
 		refering.appendChild(task);
 
 	}
@@ -390,7 +431,7 @@ public class XMLStructureBuilder {
 		return "[" + targetNode.title + "](#" + targetNode.id + ")";
 	}
 
-	private static void createListLink(Note note, List<String> noteList, Element containingElement, String className) {
+	private static void createListLink(Note note, Set<String> noteList, Element containingElement, String className) {
 
 		String finalLinkList = "\n";
 		for (String targetedNote : noteList) {

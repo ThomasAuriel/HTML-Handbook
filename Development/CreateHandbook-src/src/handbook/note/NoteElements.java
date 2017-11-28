@@ -16,7 +16,10 @@ public class NoteElements {
 	public static final transient String balise_attribute_version = "version";
 
 	public static final transient String balise_attribute_tags = "tags";
-	public static final transient String balise_attribute_taskstatus = "task";
+	public static final transient String balise_attribute_task = "task";
+	public static final transient String balise_attribute_task_status = "status";
+	public static final transient String balise_attribute_task_previous = "previous";
+	public static final transient String balise_attribute_task_next = "next";
 
 	public static final transient String balise_attribute_toc = "toc";
 	public static final transient String balise_attribute_dashboard = "dashboard";
@@ -29,9 +32,9 @@ public class NoteElements {
 	public static final transient String balise_attribute_content = "content";
 
 	// Reference elements
-	public static final transient String balise_attribute_references = "references";
-	public static final transient String balise_attribute_activities = "activities";
-	public static final transient String balise_attribute_tasks = "tasks";
+	public static final transient String balise_attribute_reference_notes = "references";
+	public static final transient String balise_attribute_reference_activities = "activities";
+	public static final transient String balise_attribute_reference_tasks = "tasks";
 	// Subcontent
 	public static final transient String balise_attribute_subcontent = "subcontent";
 

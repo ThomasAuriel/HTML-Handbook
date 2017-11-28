@@ -3,9 +3,12 @@ package handbook.note;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.w3c.dom.Element;
 
@@ -37,9 +40,9 @@ public class Note {
 			throw new NullPointerException("The note [" + id + "] is not defined.");
 		return note;
 	}
-	
+
 	public static String formatID(String id) {
-		 return id.replaceAll("\\s", "");
+		return id.replaceAll("\\s", "");
 	}
 
 	/**
@@ -66,30 +69,36 @@ public class Note {
 	public String date;
 	public String version;
 
-	public List<String> references;
-	public List<String> activity;
-	public List<String> tasks;
+	public Set<String> references;
+	public Set<String> activity;
+	public Set<String> tasks;
 
 	// Tags
-	public List<String> tags;
+	public Set<String> tags;
 
 	// Toc
 	public Integer tocLevel;
 
 	// Task
 	public String taskStatus;
-	public List<String> previousElements;
-	public List<String> nextElements;
+	public Set<String> previousElements;
+	public Set<String> nextElements;
 
 	// Dashboard
 	public Integer dashboardLevel;
-	public List<String> dashboardActiveTasks;
-	public List<String> dashboardWaitingTasks;
-	public List<String> dashboardDoneTasks;
+	public Set<String> dashboardActiveTasks;
+	public Set<String> dashboardWaitingTasks;
+	public Set<String> dashboardDoneTasks;
 	public String activityDate;
 
 	// Content
 	public String content;
+	
+	private static final Comparator<String> ignoreCaseComparator = new Comparator<String>() {
+	    public int compare(String s1, String s2) {
+	        return s1.compareToIgnoreCase(s2);
+	    }
+	};
 
 	/**
 	 * Create a note with all the required elements.
@@ -124,9 +133,9 @@ public class Note {
 		extractTags(markdownFile, yamlElements);
 		extractTocLevel(markdownFile, yamlElements);
 
-		references = new ArrayList<String>();
-		activity = new ArrayList<String>();
-		tasks = new ArrayList<String>();
+		references = new TreeSet<String>(ignoreCaseComparator);
+		activity = new TreeSet<String>(ignoreCaseComparator);
+		tasks = new TreeSet<String>(ignoreCaseComparator);
 
 		// Dashboard, Task, Activity date
 		extractActivityDate(markdownFile, yamlElements);
@@ -264,11 +273,14 @@ public class Note {
 	 */
 	@SuppressWarnings("unchecked")
 	private void extractTags(File markdownFile, Map<String, Object> yamlElements) throws Exception {
+		
+		this.tags = new TreeSet<String>(ignoreCaseComparator);
+		
 		try {
-			this.tags = (List<String>) yamlElements.get(NoteElements.balise_attribute_tags);
+			List<String> tmpList = (List<String>) yamlElements.get(NoteElements.balise_attribute_tags);
 
-			if (this.tags == null)
-				this.tags = new ArrayList<String>();
+			if (tmpList != null)
+				this.tags.addAll(tmpList);
 		} catch (Exception e) {
 			HandbookUI.addMessage("An error occured will trying to read the list of tags of the markdown file: "
 					+ markdownFile.getPath());
@@ -300,7 +312,7 @@ public class Note {
 	 */
 	private void extractActivityDate(File markdownFile, Map<String, Object> yamlElements) throws Exception {
 		try {
-			this.activityDate = (String) yamlElements.get(NoteElements.balise_attribute_activities);
+			this.activityDate = (String) yamlElements.get(NoteElements.balise_attribute_reference_activities);
 
 			if (this.activityDate == null)
 				this.activityDate = new String();
@@ -326,9 +338,9 @@ public class Note {
 		extractDashboardLevel(markdownFile, yamlElements);
 		// If a dashboard level is defined
 		if (dashboardLevel > 0) {
-			dashboardActiveTasks = new ArrayList<String>();
-			dashboardWaitingTasks = new ArrayList<String>();
-			dashboardDoneTasks = new ArrayList<String>();
+			dashboardActiveTasks = new TreeSet<String>(ignoreCaseComparator);
+			dashboardWaitingTasks = new TreeSet<String>(ignoreCaseComparator);
+			dashboardDoneTasks = new TreeSet<String>(ignoreCaseComparator);
 		}
 	}
 
@@ -339,7 +351,7 @@ public class Note {
 	 */
 	private void extractTaskStatus(File markdownFile, Map<String, Object> yamlElements) throws Exception {
 		try {
-			this.taskStatus = (String) yamlElements.get(NoteElements.balise_attribute_taskstatus);
+			this.taskStatus = (String) yamlElements.get(NoteElements.balise_attribute_task);
 
 			if (this.taskStatus == null)
 				this.taskStatus = new String();
@@ -358,13 +370,14 @@ public class Note {
 	@SuppressWarnings("unchecked")
 	private void extractPreviousElements(File markdownFile, Map<String, Object> yamlElements) throws Exception {
 
-		this.nextElements = new ArrayList<String>();
+		this.nextElements = new TreeSet<String>(ignoreCaseComparator);
+		this.previousElements = new TreeSet<String>(ignoreCaseComparator);
 
 		try {
-			this.previousElements = (List<String>) yamlElements.get(NoteElements.balise_attribute_previous);
+			List<String> tmpList = (List<String>) yamlElements.get(NoteElements.balise_attribute_previous);
 
-			if (this.previousElements == null)
-				this.previousElements = new ArrayList<String>();
+			if (tmpList != null)
+				previousElements.addAll(tmpList);
 		} catch (Exception e) {
 			HandbookUI.addMessage("An error occured will trying to read the previous tasks of the markdown file: "
 					+ markdownFile.getPath());

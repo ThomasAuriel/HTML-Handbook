@@ -18,6 +18,11 @@ a:hover{
 	text-decoration: underline;
 }
 
+ul, ol{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
 hr {
     display: block;
     height: 1px;
@@ -101,15 +106,16 @@ notetitle .title a:before{
 	height: 30px;
 	margin-left:-30px;
 }
-.filepath a{
+.filepath a,
+.filepath img{
 	width: 30px;
 	height: 30px;
+}
+.filepath a{
 	display: inline-block;
-	background-image: url(./file.svg);
-	background-repeat: no-repeat;
-	line-height: 3em;
-    color: transparent;
-    overflow: hidden;
+}
+.filepath img{
+	display: block;
 }
 
 .title a:link{
@@ -140,7 +146,7 @@ headline .filepath{
 .tags ul{
 	padding: 0px;
 }
-.tags ul:before {
+.tags ul:not(:empty):before {
 	content: "Tags: ";
 	font-weight: bold;
 }
@@ -162,7 +168,7 @@ headline .filepath{
 	margin-bottom: 50px;
 	display: block;
 }
-.toc:before{
+.toc:not(:empty):before{
 	content: "Table of Content";
 	font-size: 1.5em;
 }
@@ -179,21 +185,21 @@ references{
 	/*margin-bottom: 50px;
 	border-bottom: 1px solid #ccc;*/
 }
-.references:before{
+.references:not(:empty):before{
 	content: "Reference";
 	font-size: 1.5em;
 }
 .references li{
 	list-style-type: none;
 }
-.activities:before{
+.activities:not(:empty):before{
 	content: "Activities";
 	font-size: 1.5em;
 }
 .activities li{
   list-style-type: none;
 }
-.tasks:before{
+.tasks:not(:empty):before{
 	content: "Tasks";
 	font-size: 1.5em;
 }
@@ -204,7 +210,7 @@ references{
 .references:empty, 
 .activities:empty, 
 .tasks:empty {
-   display: none;
+	display: none;
 }
 
 
@@ -217,35 +223,38 @@ dashboard{
 	/*margin-bottom: 50px;
 	border-bottom: 1px solid #ccc;*/
 }
-.dashboard_active:before{
+dashboard li{
+	display: inline;
+}
+.dashboard_active:not(:empty):before{
 	content: "Active Tasks";
 	font-size: 1.5em;
 }
-.dashboard_active ul{
+.dashboard_active li{
 	list-style-type: none;
 	background-color: #86AF49;
+	border-radius: 4px;
+	padding: 1px;
 }
-.dashboard_done:before{
-	content: "Done Tasks";
-	font-size: 1.5em;
-}
-.dashboard_done ul{
-	list-style-type: none;
-	background-color: #D6D5DA;
-}
-.dashboard_waiting:before{
+.dashboard_waiting:not(:empty):before{
 	content: "Waiting Tasks";
 	font-size: 1.5em;
 }
-.dashboard_waiting ul{
+.dashboard_waiting li{
 	list-style-type: none;
 	background-color: #90A7D0;
+	border-radius: 4px;
+	padding: 1px;
 }
-
-.references:empty, 
-.activities:empty, 
-.tasks:empty {
-	display: none;
+.dashboard_done:not(:empty):before{
+	content: "Done Tasks";
+	font-size: 1.5em;
+}
+.dashboard_done li{
+	list-style-type: none;
+	background-color: #D6D5DA;
+	border-radius: 4px;
+	padding: 1px;
 }
 
 /* Tasks */
@@ -254,10 +263,15 @@ tasks:empty {
 }
 
 tasks ul{
+	margin-top: 5px;
 	padding: 0px;
 }
-tasks ul:before {
-	content: "Tasks: ";
+tasks ul.previous:not(:empty):before {
+	content: "Previous: ";
+	font-weight: bold;
+}
+tasks ul.next:not(:empty):before {
+	content: "Next:";
 	font-weight: bold;
 }
 tasks li{
@@ -271,15 +285,29 @@ tasks li:last-child:after {
     content: "";
 }
 
+tasks .status:first-letter {
+    text-transform: uppercase;
+}
+tasks .status:before {
+	content: "Status: ";
+	font-weight: bold;
+}
+
 tasks .active{
+	display: inline;
 	background-color: #86AF49;
 	border-radius: 4px;
+	padding: 1px;
 }
 tasks .done{
+	display: inline;
 	background-color: #D6D5DA;
 	border-radius: 4px;
+	padding: 1px;
 }
 tasks .waiting{
+	display: inline;
 	background-color: #90A7D0;
 	border-radius: 4px;
+	padding: 1px;
 }

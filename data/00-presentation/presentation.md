@@ -1,5 +1,6 @@
 ```
 title: Presentation
+toc:2
 tags:
  - Markdown
 ```
@@ -11,7 +12,7 @@ This handbook is a tool which provides a simple handbook rendered through Markdo
 This tool is published on GitHub: https://github.com/ThomasAuriel/HTML-Handbook. It is **free** and available to download. **You should not pay** to get this tool.
 
 ## Motivation
-This tool provides a way to display information similarly to a handbook. All information is displayed on a unique page and each note follow each other. Moreover, a system based on a tags and references allow to navigate in the whole document.No other tool allows to do this in a light way. To run this handbook you need a modern internet browser, a simple text editor and Java 1.5 at least. My personal recommendations go to Firefox (I prepare another tool for this browser), Typora (a very handy and beautiful Markdown editor).  That's all. You do not need a server to host the notebook, and you do not need to install the software.
+This tool provides a way to display information similarly to a handbook. All information is displayed on a unique page and each note follow each other. Moreover, a system based on a tags and references allow to navigate in the whole document. No other tool allows to do this in a light way. To run this handbook you need a modern internet browser, a simple text editor and Java 1.5 at least. My personal recommendations go to Firefox (I prepare another tool for this browser), Typora (a very handy and beautiful Markdown editor).  That's all. You do not need a server to host the notebook, and you do not need to install the software.
 
 Some other software exists to provide a way to display and organise information. I propose you a list of few and most notables.
 - **OneNote**: probably the best known. This software allows to display, organise and edit notes, to share them and to read them in a very friendly interface. Their several limitation which are: not free licence (property of Microsoft), need to install it, cannot export all notes in another software easily.
