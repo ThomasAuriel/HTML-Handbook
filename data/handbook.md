@@ -1,5 +1,6 @@
 ```
 title: A simple Handbook
+id: rootElement
 tag:
  - a note
  - a-second-note
