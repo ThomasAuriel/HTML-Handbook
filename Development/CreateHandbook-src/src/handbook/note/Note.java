@@ -12,7 +12,8 @@ import java.util.TreeSet;
 
 import org.w3c.dom.Element;
 
-import handbook.utils.template.TemplateUtils;
+import handbook.utils.errors.SameIDError;
+import handbook.utils.note.TemplateUtils;
 import handbook.view.HandbookUI;
 
 /**
@@ -93,11 +94,11 @@ public class Note {
 
 	// Content
 	public String content;
-	
+
 	private static final Comparator<String> ignoreCaseComparator = new Comparator<String>() {
-	    public int compare(String s1, String s2) {
-	        return s1.compareToIgnoreCase(s2);
-	    }
+		public int compare(String s1, String s2) {
+			return s1.compareToIgnoreCase(s2);
+		}
 	};
 
 	/**
@@ -273,9 +274,9 @@ public class Note {
 	 */
 	@SuppressWarnings("unchecked")
 	private void extractTags(File markdownFile, Map<String, Object> yamlElements) throws Exception {
-		
+
 		this.tags = new TreeSet<String>(ignoreCaseComparator);
-		
+
 		try {
 			List<String> tmpList = (List<String>) yamlElements.get(NoteElements.balise_attribute_tags);
 
@@ -406,7 +407,12 @@ public class Note {
 	/**
 	 * Populate maps to find faster the correct element according to its id.
 	 */
-	private void populateMaps() {
+	private void populateMaps() throws Exception {
+
+		// Check if a a note with the same id
+		if (idMap.containsKey(id)) {
+			throw new SameIDError(this, idMap.get(id));
+		}
 
 		// Populate the id map
 		idMap.put(id, this);

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
@@ -50,7 +51,8 @@ public class HandbookUI extends JFrame {
 
 		txtpnHandbookFormaterLok = new JTextPane();
 		txtpnHandbookFormaterLok.setText("Handbook Formater log\n===============");
-		contentPane.add(txtpnHandbookFormaterLok, BorderLayout.CENTER);
+		JScrollPane scroll = new JScrollPane(txtpnHandbookFormaterLok);
+		contentPane.add(scroll, BorderLayout.CENTER);
 	}
 
 }

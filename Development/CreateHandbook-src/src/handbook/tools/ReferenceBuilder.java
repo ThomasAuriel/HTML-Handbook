@@ -1,7 +1,7 @@
 package handbook.tools;
 
 import handbook.note.Note;
-import handbook.utils.template.TaskUtil;
+import handbook.utils.note.TaskUtil;
 import handbook.view.HandbookUI;
 
 public class ReferenceBuilder {

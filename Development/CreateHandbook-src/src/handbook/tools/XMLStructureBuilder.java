@@ -10,8 +10,8 @@ import org.w3c.dom.Text;
 import handbook.note.Note;
 import handbook.note.NoteElements;
 import handbook.utils.Utils;
-import handbook.utils.template.TaskUtil;
-import handbook.utils.template.TemplateUtils;
+import handbook.utils.note.TaskUtil;
+import handbook.utils.note.TemplateUtils;
 import handbook.view.HandbookUI;
 
 public class XMLStructureBuilder {

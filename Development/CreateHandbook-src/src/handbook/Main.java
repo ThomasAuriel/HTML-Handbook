@@ -20,7 +20,7 @@ public class Main {
 			HandbookUI ui = new HandbookUI();
 			ui.setVisible(true);
 
-			// Create the hierarchy tree
+			// Create the note tree
 			Note note = StructureBuilder.getStructure(new File("./data"));
 
 			// Finish to format notes

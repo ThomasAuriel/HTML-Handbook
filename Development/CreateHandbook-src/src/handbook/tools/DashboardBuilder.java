@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import handbook.note.Note;
-import handbook.utils.template.TaskUtil;
+import handbook.utils.note.TaskUtil;
 
 public class DashboardBuilder {
 
