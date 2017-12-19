@@ -39,11 +39,15 @@ title: This is a title
 ```
 
 + **id**: The id represents a text used to link the element through the whole document (see [tag mechanism](#tags)). If this element is not specified, the title is used an ID. IDs shall be unique otherwise it is not possible to navigate correctly through the document.
+
+  If you want to not use the id, since you does not require to target this specific note, and does not want to bother with the uniqueness of the id, then two values are possible. Use `none` or `-` to use random and unique id.
+
 ```md
 ​```
 id: this is an id
 ​```
 ```
+
 
 + **toc**: The ToC element defines the size of the *table of content* to display in the current note. The value required is an integer. If this element is not provided, then the level is supposed to be 0 and no table of content are displayed.
 ```md
