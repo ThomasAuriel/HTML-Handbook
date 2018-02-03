@@ -71,8 +71,8 @@ public class TaskUtil {
 			boolean isWaiting = false;
 			for (String previous : note.previousElements) {
 				Note previousNote = Note.getNote(previous);
-				if (isActive(previousNote))
-					// If one previous note is active
+				if (isActive(previousNote) || isWaiting(previousNote))
+					// If one previous note is active or waiting
 					isWaiting = true;
 			}
 			return isWaiting;
