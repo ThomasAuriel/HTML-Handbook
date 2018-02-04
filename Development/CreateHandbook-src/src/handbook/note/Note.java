@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.UUID;
 
 import org.w3c.dom.Element;
 
@@ -203,9 +204,9 @@ public class Note {
 				// Be sure that the title is not empty
 				extratTitle(markdownFile, yamlElements);
 				this.id = this.title;
-//			} else if (this.id.equals("none") || this.id.equals("-")) {
-//				// If the id is equals to "none" or to "-"
-//				this.id = UUID.randomUUID().toString();
+			} else if (this.id.equals("none") || this.id.equals("-")) {
+				// If the id is equals to "none" or to "-"
+				this.id = UUID.randomUUID().toString();
 			}
 
 			// Format id : remove spaces
