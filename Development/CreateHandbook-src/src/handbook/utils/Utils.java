@@ -1,6 +1,7 @@
 package handbook.utils;
 
 import java.io.File;
+import java.nio.file.FileSystems;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -27,31 +28,34 @@ public class Utils {
 		return toReturn;
 	}
 
-	private static Pattern pDescription = Pattern.compile("\\[.*?\\]");
-	private static Pattern pURL = Pattern.compile("\\(.*?\\)");
+	private static Pattern pURL = Pattern.compile("\\[.*\\]\\((..*?)\\)");
 
+	/**
+	 * Format path contained in the structure [.*](./pathToFormat).
+	 * 
+	 * @param content
+	 * @param file
+	 * @return
+	 */
 	public static String formatPath(String content, File file) {
 
-		// Extract description
-		Matcher mDescrition = pDescription.matcher(content);
-		String description;
-		if (mDescrition.find())
-			description = mDescrition.group(0);
-		else
-			return content;
-
-		// Extract link
+		// Extract links and format them
 		Matcher mURL = pURL.matcher(content);
-		String url;
-		if (mURL.find())
-			url = mURL.group(0);
-		else
-			return content;
+		while (mURL.find()) {
+			String originalURL = mURL.group(1);
 
-		// Format the link
-		url = url.replace("^(.", file.getParent());
-		url = url.replaceAll("/", Matcher.quoteReplacement(File.separator));
+			String parent = file.getParent();
+			String separator = FileSystems.getDefault().getSeparator();
+			String formatedURL = originalURL.replaceFirst("^\\.([/\\\\])",
+					Matcher.quoteReplacement(parent + separator));
 
-		return description + url;
+			content = content.replaceFirst(originalURL, Matcher.quoteReplacement(formatedURL));
+
+			// Match.quoteReplacement prevents java.lang.IllegalArgumentException: character
+			// to be escaped is missing and prevent also to interprent charater as \[a-zA-Z]
+			// as special characters
+		}
+
+		return content;
 	}
 }
