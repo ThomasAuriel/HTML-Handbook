@@ -6,9 +6,9 @@ HTML Handbook is a way to organise notes inside handbooks. Notes are linked toge
 
 ## Version 0.5
 
-The version 0.5 reword the Java code to optimise it (faster and easier to support).
+The version 0.5 reworks the Java code to optimise it (faster and easier to support).
 
-The user will not see large change. The modification noticeable are:
+The user will not see large changes. The modification noticeable are:
 
 - General structure of the final handbook.
 - Easier CSS edition
@@ -17,7 +17,7 @@ The user will not see large change. The modification noticeable are:
 
 ## Version 0.4
 
-The version 0.4 use the markdown syntaxe to write content.
+The version 0.4 uses the markdown syntaxe to write content.
 The version is simpler than all previous versions thank to a large rework on data structure. This version is also a lot of lighter. The new version is only 38MB compare to the monstrous 172MB of the previous versions. You can still reduce the size by removing MathJax. Its only purpose is to render math equations.
 **[See documentation](https://github.com/ThomasAuriel/HTML-Handbook/blob/master/formatedHandbook.md)**
 
