@@ -34,7 +34,8 @@ public class Main {
 			XMLStructureBuilder.createXMLElements(note);
 			XMLStructureBuilder.completeXMLElements();
 
-			XMLUtils.writeFile(note, new File("formatedHandbook.md"));
+
+			XMLUtils.writeFile(note, new File("./handbook-config/formatedHandbook.md"));
 
 			HandbookUI.addMessage("Formating completed", false);
 

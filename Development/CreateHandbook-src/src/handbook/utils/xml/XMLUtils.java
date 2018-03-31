@@ -47,6 +47,8 @@ public class XMLUtils {
 	 */
 	public static void writeFile(Note note, File output) throws TransformerException {
 		try {
+			
+			output.getParentFile().mkdirs();
 
 			// write the content into xml file
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();

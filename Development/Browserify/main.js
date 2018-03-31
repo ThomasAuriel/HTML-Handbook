@@ -5,7 +5,7 @@ $(document).ready(function(){
 	var markdownScripts = require('./markdownScripts.js')
 
 	//Load the handbook
-	var formatedHandbook = fileScripts.getFileContent('./formatedHandbook.md', false)
+	var formatedHandbook = fileScripts.getFileContent('./handbook-config/formatedHandbook.md', false)
 	var handbook = $('#handbook')
 	handbook.html(formatedHandbook)
 

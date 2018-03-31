@@ -26,7 +26,7 @@ public class TemplateUtils {
 
 		Document xmlElement;
 		try {
-			xmlElement = XMLUtils.parseXML("./templates" + File.separator + path);
+			xmlElement = XMLUtils.parseXML("./handbook-config/templates" + File.separator + path);
 		} catch (Exception e) {
 			HandbookUI.addMessage("Impossible to parse the template : " + path
 					+ " \nCheck that the template xml tags are correctly closed.");
