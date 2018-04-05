@@ -111,7 +111,7 @@ public class XMLStructureBuilder {
 		titleNode.appendChild(title);
 
 		// Link
-		String formatedFilepath = " [![](./css/file.svg)](" + note.markdownFile.getPath().replace(" ", "%20") + ") ";
+		String formatedFilepath = " [![](./handbook-config/css/file.svg)](" + note.markdownFile.getPath().replace(" ", "%20") + ") ";
 		Text linkText = note.xmlElement.getOwnerDocument().createTextNode(formatedFilepath);
 
 		Element link = note.xmlElement.getOwnerDocument().createElement("div");
