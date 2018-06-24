@@ -2,6 +2,10 @@
 
 HTML Handbook is a way to organise notes inside handbooks. Notes are linked together through tags. All notes are aggregated in a unique vertical column allowing to display and print it similarly to a true handbook.
 
+# From Github to Gitlab
+
+The project moved to https://gitlab.com/ThomasAuriel/HTML-Handbook
+
 # Version
 
 ## Version 0.5
